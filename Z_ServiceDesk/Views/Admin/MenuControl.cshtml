@@ -1,0 +1,162 @@
+﻿@model List<Api_ZserviceDesk.Models.zdesk_m_page_master_tbl>
+
+@*@{
+        Layout = null;
+    }*@
+@*@Styles.Render("~/Content/Kendo")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/MenuCss")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/Kendo")
+    @Scripts.Render("~/bundles/MenuJs")*@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    @*<div class="container-fluid">
+        <div class="row">*@
+    @*<div>
+            <asp:Button ID="btnLoadMenu" Text="LoadMenu" runat="server" OnClientClick="javascript:return LoadMenu()" CausesValidation="false" UseSubmitBehavior="false" />
+        </div>
+        <br /><br />
+        <div class="float-xs-left">
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="col-sm-3 menu">
+
+        </div>*@
+    <div class="leftbar-tab-menu">
+        <div class="main-icon-menu" style="background-image: url('../../Images/leftbg2.jpg');background-blend-mode: difference;">
+            <a href="../crm/crm-index.html" class="logo logo-metrica d-block text-center">
+            </a>
+            <nav class="nav">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        IEnumerable<Api_ZserviceDesk.Models.zdesk_m_page_master_tbl> items = Model;
+                        if (@item.ParentID == 0)
+                        {
+                            var ID = item.page_master_id_pk;
+                            var CurrentItem = item.PageDesc;
+                            var ItemURL = "/" + item.PathURL;
+                            var classname = item.classname;
+
+                            <a href="#@classname" class="nav-link" data-toggle="tooltip-custom" data-placement="right" data-trigger="hover" title="" data-original-title="@CurrentItem">
+                                <i data-feather="@classname" class="align-self-center menu-icon icon-dual"></i>
+                            </a>
+                        }
+
+                    }
+                }
+                else
+                {
+                    { Response.Redirect("~/Home/Index"); }
+                }
+            </nav>
+        </div>
+
+        <div class="main-menu-inner" style="background-image: url('../../Images/rightbg2.jpg');">
+            <div class="topbar-left" style="background-image: url('../../Images/leftbg2.jpg');">
+                <a href="../crm/crm-index.html" class="logo">
+                    <span>
+                        <img src="../assets/images/logo-dark.png" alt="logo-large" class="logo-lg logo-dark">
+                    </span>
+                </a>
+            </div>
+
+            <div class="menu-body slimscroll">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        IEnumerable<Api_ZserviceDesk.Models.zdesk_m_page_master_tbl> items = Model.Where(m => m.IsVisibleInMenu == true);
+                        if (item.ParentID == 0)
+                        {
+                            var ID = item.page_master_id_pk;
+                            var CurrentItem = item.PageDesc;
+                            var ItemURL = "/" + item.PathURL;
+                            var classname = item.classname;
+                            var ItemVisibile = item.IsVisibleInMenu;
+
+                            if (ItemVisibile == true)
+                            {
+                                var children = items.Where(m => m.ParentID == item.page_master_id_pk && item.IsVisibleInMenu == true);
+                                if (children != null && children.Count() > 0)
+                                {
+                                    <div id="@classname" class="main-icon-menu-pane">
+                                        <div class="title-box">
+                                            @*<h6 class="menu-title">@CurrentItem</h6>*@
+                                        </div>
+                                        <ul class="nav metismenu">
+                                            @*<li class="nav-item">
+                                                    <a class="nav-link" href="#"><span class="w-100">RISK</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                                                    <ul class="nav-second-level" aria-expanded="false">
+                                                        <li><a href="/RiskManagement/Index">All Risks</a></li>
+                                                        <li><a href="/RiskManagement/RiskSystemIndex">Systems</a></li>
+                                                        <li><a href="/RiskManagement/RiskEntityIndex">Entities</a></li>
+                                                        <li><a href="/Assets/Index">Cyber Assets</a></li>
+                                                    </ul>
+                                                </li>*@
+                                            @foreach (var child in children)
+                                            {
+                                                var childID = child.page_master_id_pk;
+                                                var childCurrentItem = child.PageDesc;
+                                                var childItemURL = child.PathURL;
+                                                var childclassname = child.classname;
+
+                                                var subchildren = items.Where(m => m.ParentID == child.page_master_id_pk && m.IsVisibleInMenu == true);
+
+                                                @*<label>@child.page_master_id_pk</label>*@
+
+                                                if (subchildren != null && subchildren.Count() > 0)
+                                                {
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="#"><span class="w-100">@childCurrentItem</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                                                        <ul class="nav-second-level" aria-expanded="false">
+                                                            @foreach (var subchild in subchildren)
+                                                            {
+                                                                var subchildID = subchild.page_master_id_pk;
+                                                                var subchildCurrentItem = subchild.PageDesc;
+                                                                var subchildItemURL = subchild.PathURL;
+                                                                var subchildclassname = subchild.classname;
+
+                                                                <li><a href="@subchildItemURL">@subchildCurrentItem</a></li>
+                                                            }
+
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="nav-item"><a class="nav-link" href="@childItemURL">@childCurrentItem</a></li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div id="@classname" class="main-icon-menu-pane">
+                                        <div class="title-box">
+                                            @*<h6 class="menu-title">@CurrentItem</h6>*@
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    { Response.Redirect("~/Home/Index"); }
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

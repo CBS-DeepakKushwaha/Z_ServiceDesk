@@ -1,0 +1,925 @@
+﻿
+@{
+    ViewBag.Title = "Incident";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<style>
+    .daterangepicker.ltr.show-calendar.opensleft {
+        right: 0px;
+        margin-right: 150px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <button type="button" id="btnNew" class="btn btn-gradient-primary " onclick="location.href='/Ticket/Index'" style="margin-top: -8px;"><i class="mdi mdi-tablet-dashboard mr-2"></i>Go to Module</button>
+            </div>
+            <h4 class="page-title">INCIDENT</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer !important">
+        @*<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast" style="background-color: rgb(253 218 222)!important;">
+                <div class="toast-header">
+                    <h5 class="mr-auto New" id="TotalNew" onclick="filterdata(this)" > </h5>
+                </div>
+                <div class="toast-body font-13">
+                    New
+                </div>
+            </div>*@
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalNew" onclick="filterdata(this)" class="New"> </span></h2>
+                        <p class="mb-0">New</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+        @*<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                <div class="toast-header">
+                    <h5 class="mr-auto" id="TotalAssigned" onclick="filterdata(this)"></h5>
+                </div>
+                <div class="toast-body font-13">
+                    Assigned
+                </div>
+            </div>*@
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalAssigned" onclick="filterdata(this)" class="Assigned"></span></h2>
+                        <p class="mb-0">Assigned</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+        @*<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                <div class="toast-header">
+                    <h5 class="mr-auto" id="TotalInProgress" onclick="filterdata(this)"></h5>
+                </div>
+                <div class="toast-body font-13">
+                    In-Progress
+                </div>
+            </div>*@
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalInProgress" onclick="filterdata(this)" class="In Progress"></span></h2>
+                        <p class="mb-0">In-Progress</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+        @*<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                <div class="toast-header">
+                    <h5 class="mr-auto" id="TotalPause" onclick="filterdata(this)"></h5>
+                </div>
+                <div class="toast-body font-13">
+                    Pause
+                </div>
+            </div>*@
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalPause" onclick="filterdata(this)" class="Pause"> </span></h2>
+                        <p class="mb-0">Pause</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+        @*<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                <div class="toast-header">
+                    <h5 class="mr-auto" id="TotalResolved" onclick="filterdata(this)"> </h5>
+                </div>
+                <div class="toast-body font-13">
+                    Resolved
+                </div>
+            </div>*@
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalResolved" onclick="filterdata(this)" class="Resolved"> </span></h2>
+                        <p class="mb-0">Resolved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+        @*<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                <div class="toast-header">
+                    <h5 class="mr-auto" id="TotalCancel" onclick="filterdata(this)"> </h5>
+                </div>
+                <div class="toast-body font-13">
+                    Cancelled
+                </div>
+            </div>*@
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalCancel" onclick="filterdata(this)" class="Cancel"> </span></h2>
+                        <p class="mb-0">Cancelled</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+        @*<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                <div class="toast-header">
+                    <h5 class="mr-auto" id="TotalClosed" onclick="filterdata(this)"> </h5>
+                </div>
+                <div class="toast-body font-13">
+                    Closed
+                </div>
+            </div>*@
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalClosed" onclick="filterdata(this)" class="Closed"> </span></h2>
+                        <p class="mb-0">Closed</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+        @*<div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast">
+                <div class="toast-header">
+                    <h5 class="mr-auto" id="TotalRecord"> </h5>
+                </div>
+                <div class="toast-body font-13">
+                    Total
+                </div>
+            </div>*@
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalRecord" onclick="filterdata(this)" class="TotalRecord"> </span></h2>
+                        <p class="mb-0">Total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body" style="overflow:scroll;max-height:475px;">
+                <table id="tbodyViewWorkLoad" class="table table-striped table-bordered" style="width: 100% !important; font-size:11px;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Open</th>
+                            <th>Overdue</th>
+                            @*<th>New</th>*@
+                            <th>Assigned</th>
+                            <th>In Progress</th>
+                            <th>Paused</th>
+                            <th>Resolved</th>
+                            <th>Reopened</th>
+                            <th>Closed</th>
+                            <th>Cancel</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddlTotalIncidentChart" class="form-control ml-3" style="margin-top: -10px;">
+                                    <option value="30" selected>30 Days</option>
+                                    <option value="90">90 Days</option>
+                                    <option value="180">6 Months</option>
+                                    <option value="365">1 Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        @*<div class="form-group row bgHeading">
+                                <label class="col-lg-12 col-form-label font-weight-normal font-15">Total Incidents</label>
+                            </div>*@
+                        <div class="chart-demo">
+                            <div id="TotalIncidents_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0 mb-4">Open Incidents By Status</h4>
+                        <div class="pt-3 pb-4">
+                            <div id="OpenIncidents_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0">Open Incidents By Severity</h4>
+                        @*<div class="form-group row bgHeading">
+                                <label class="col-lg-12 col-form-label font-weight-normal font-15"></label>
+                            </div>*@
+                        <div class="pt-3 pb-4">
+                            <div id="OpenIncidents_Severity_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3" style="display:none;">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-4">All Incidents By Severity</h4>
+                <div class='form-group'>
+                    <div class="input-group row" style="margin-left:1px;">
+                        <label>Filter :</label>
+                        <select id="ddl_Incidents_By_Priority" class="form-control ml-3" style="margin-top: -10px;">
+                            <option value="1">1 Week</option>
+                            <option value="2">2 Weeks</option>
+                            <option value="3">1 Month</option>
+                            <option value="4">3 Months</option>
+                            <option value="5">Custom</option>
+                        </select>
+                        <button class="btn btn-sm btn-default datebtn ml-3" type="button" onclick="GetIncidentbyPrority(this)" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                        <button class="btn btn-sm btn-default dwnloadbtn" type="button" onclick="ExcelGetIncident(this,2)" style="margin-top:-15px;"><span><i class="fa fa-download" aria-hidden="true"></i></span></button>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="input-group row">
+                        <input type="text" style="display:none" name="daterange" id="daterange_By_Priority" class="form-control ml-3" />
+                    </div>
+                </div>
+                <div class="pt-3">
+                    <div id="apex_pie4" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3" style="display:none;">
+        <div class="card">
+            <div class="card-body" style="height:429px;">
+                <h4 class="header-title mt-0 mb-4">SLA Uptime</h4>
+                <div class="form-group">
+                    <div class="input-group row" style="margin-left:1px;">
+                        <label>Filter :</label>
+                        <select id="ddl_Incidance_sla_agreement" class="form-control ml-3" style="margin-top: -10px;">
+                            <option value="1">1 Week</option>
+                            <option value="2">2 Weeks</option>
+                            <option value="3">1 Month</option>
+                            <option value="4">3 Months</option>
+                            <option value="5">Custom</option>
+                        </select>
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="GetSalLevelAgreement(this)" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="input-group row">
+                        <input type="text" style="display:none" name="daterange" id="daterange_By_agreement" class="form-control ml-3" />
+                    </div>
+                </div>
+                <table id="tblSlaPercentage" class="table table-striped table-bordered" style="width:100% !important;">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-4">Response SLA Status</h4>
+                <div class="form-group ">
+                    <div class="input-group row" style="margin-left:1px;">
+                        <label>Filter :</label>
+                        <select id="ddl_Incidance_Resp_Sla" class="form-control ml-3" style="margin-top: -10px;">
+                            <option value="1">1 Week</option>
+                            <option value="2">2 Weeks</option>
+                            <option value="3">1 Month</option>
+                            <option value="4">3 Months</option>
+                            <option value="5">Custom</option>
+                        </select>
+                        <button class="btn btn-sm btn-default datebtn ml-3" type="button" onclick="GetIncidentResponseSLA(this);" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                        <button class="btn btn-sm btn-default dwnloadbtn" type="button" onclick="ExcelGetIncident(this,6)" style="margin-top:-15px;"><span><i class="fa fa-download" aria-hidden="true"></i></span></button>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="input-group row">
+                        <input type="text" style="display:none" name="daterange" id="daterange_Resp_Sal" class="form-control ml-3" />
+                    </div>
+                </div>
+                <div class="pt-3">
+                    <div id="apex_pie2_resp_sla" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-4">Resolution SLA Status</h4>
+                <div class="form-group ">
+                    <div class="input-group row" style="margin-left:1px;">
+                        <label>Filter :</label>
+                        <select id="ddl_Incidance_Sla" class="form-control ml-3" style="margin-top: -10px;">
+                            <option value="1">1 Week</option>
+                            <option value="2">2 Weeks</option>
+                            <option value="3">1 Month</option>
+                            <option value="4">3 Months</option>
+                            <option value="5">Custom</option>
+                        </select>
+                        <button class="btn btn-sm btn-default datebtn ml-3" type="button" onclick="GetIncidentSal(this);" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                        <button class="btn btn-sm btn-default dwnloadbtn" type="button" onclick="ExcelGetIncident(this,6)" style="margin-top:-15px;"><span><i class="fa fa-download" aria-hidden="true"></i></span></button>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="input-group row">
+                        <input type="text" style="display:none" name="daterange" id="daterange_Sal" class="form-control ml-3" />
+                    </div>
+                </div>
+                <div class="pt-3">
+                    <div id="apex_pie2" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Technician</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_inc_tech_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenIncidentsTechnicianChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_inc_by_tech" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenIncidents_Technician_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Technician</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_inc_tech_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedIncidentsTechnicianChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_inc_by_tech" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedIncidents_Technician_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Support Group</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_inc_supp_gp_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenIncidentsSupportGroupChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_inc_by_supp_grp" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenIncidents_SupportGroup_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Support Group</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_inc_supp_gp_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedIncidentsSupportGroupChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_inc_by_supp_grp" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedIncidents_SupportGroup_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Category-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_inc_category_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenIncidentsCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_inc_by_category" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenIncidents_Category_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_inc_category_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedIncidentsCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_inc_by_category" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedIncidents_Category_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Sub Category-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_inc_sub_category_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenIncidentsSubCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_inc_by_sub_category" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenIncidents_Sub_Category_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Sub Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_inc_sub_category_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedIncidentsSubCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_inc_by_sub_category" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedIncidents_Sub_Category_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*location*@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_inc_location_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenIncidentsLocationChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_inc_by_location" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenIncidents_Location_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_inc_location_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedIncidentsLocationChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_inc_by_location" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedIncidents_Location_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*SubLocation*@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_inc_Sublocation_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenIncidentsSubLocationChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_inc_by_Sublocation" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenIncidents_SubLocation_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_inc_Sublocation_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedIncidentsSubLocationChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_inc_by_Sublocation" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedIncidents_SubLocation_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Support Departent*@
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_inc_sup_Department_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenIncidentsSubCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_inc_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenIncidents_Sup_Depatment_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Sub Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_inc_sup_Department_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedIncidentsSubCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_inc_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedIncidents_Sup_Depatment_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- App favicon -->
+
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="~/Scripts/View/Common/Common.js?t=<?=time()?>"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Home/IncidentDashboard.js"></script>

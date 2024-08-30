@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "EditVendorsmanagement";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<!-- Sweet Alert -->
+<link href="../plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+<link href="../plugins/animate/animate.css" rel="stylesheet" type="text/css">
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+
+            </div>
+            <h4 class="page-title">UPDATE VENDOR</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-2 pull-right">
+                    <div class="col-md-12 text-lg-right">
+                        <button class="btn btn-gradient-primary" id="btnUpdate" type="submit">Update</button>
+                        <button class="btn btn-gradient-danger" type="button" onclick="location.href='/VendorManagement/Index'">Cancel</button>
+                    </div>
+                </div>
+                <br />
+                <h5></h5>
+                <br />
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Vendor Code</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtSupplierCode" value="" maxlength="20">
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Vendor Name</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtSupplierName" value="" maxlength="20">
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Contact Person</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtContactPerson">
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Contact Number</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtPhoneNumber" maxlength="10" required>
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Email Address</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" name="txtEmail" id="txtEmail" maxlength="100" required>
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">City</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtCity">
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+
+                </div>
+                <div class="form-group row">
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Address</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtAddress">
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Vendor Category</label>
+                            <div class="col-lg-8">
+                                <select class="select form-control select2" id="ddlSupplierCategory" name="Suppliercategory">
+                                    <option value="0">Select</option>
+                                </select>
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Vendor Status</label>
+                            <div class="col-lg-8">
+                                <select class="select form-control select2" id="ddlSupllierStatus" required>
+                                    <option value="0">Select</option>
+                                </select>
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+
+            
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">GSTNumber</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="txtGSTNumber" maxlength="100">
+                        </div>
+                    </div><!-- end col -->
+                </div>
+            </div>
+               
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Service Category</label>
+                            <div class="col-lg-8">
+                                <select class="select select2-multiple form-control select2" multiple id="ddlSupllierService" required>
+                                    <option value="0">Select</option>
+                                </select>
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="form-group col-md-12">
+                        <label for="txtname" class="col-form-label">Notes</label>
+                        <textarea style="min-height: 160px !important;background-color:aliceblue;" rows="5" required="" id="txtNotes" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<!-- Sweet-Alert  -->
+<script src="../plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="../assets/pages/jquery.sweet-alert.init.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Common/Common.js"></script>
+<script src="~/Scripts/View/SupplierManagements/updatevendor.js"></script>

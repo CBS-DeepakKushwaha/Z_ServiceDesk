@@ -1,0 +1,73 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Knowledgebase";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<style>
+    .daterangepicker.ltr.show-calendar.opensleft {
+        right: 0px;
+        margin-right: 200px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+
+            </div>
+            <h4 class="page-title">KNOWLEDGEBASE</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-4">CHANGE MANAGEMENT BY CHANGE TYPE</h4>
+                <div class="form-group row">
+                    <div class='input-group'>
+                        <label>Date Range:</label>
+                        <input type="text" placeholder="From Date - To Date" style="font-size: 12px !important;" name="daterange" class="form-control ml-2" />
+                        <button class="btn btn-sm btn-classic datebtn ml-2" type="button" onclick="GetManagebyChange(this)">Filter</button>
+                    </div>
+                </div>
+                <div class="" style=" position: relative; padding-top: 4.1rem; padding-bottom: 2.7rem;">
+                    <div id="ChartChagneType" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-4">CHANGE MANAGEMENT BY CATEGORY</h4>
+                <div class="form-group">
+                    <div class='input-group'>
+                        <label>Date Range:</label>
+                        <input type="text" placeholder="From Date - To Date" style="font-size: 12px !important;" name="daterange" class="form-control ml-2" />
+                        <button class="btn btn-sm btn-classic datebtn ml-2" type="button" onclick="GetManagebycategory(this)">Filter</button>
+                    </div>
+                </div>
+                <div class="chart-demo">
+                    <div id="ChartCategory" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Common/Common.js"></script>
+<script src="~/Scripts/View/Home/Knowledgebase.js"></script>
+
+

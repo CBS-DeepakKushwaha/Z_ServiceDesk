@@ -1,0 +1,11 @@
+prefix,Category,SubCategory,subject,Description,submitter,assign,status,BusinessUnit,Location,Impact,Urgency,SupportDepartment,created_date,due_date
+PR00021,Software,Anti-Virus,test,tes,Ritesh,TECHNICIAN 2,,Locon Solutions Pvt Ltd,Bangalore,Critical,Critical,Server Support,22-06-2022 00:00:00,26-06-2022 00:00:00
+PR00020,Hardware,,abc,asdfghjkl,N/A,N/A,,,,,Medium,IT Support,06-10-2021 00:00:00,10-10-2021 00:00:00
+PR00017,Software,,Error updating,Could not upgrade to newer version. ,N/A,N/A,,Locon Solutions Pvt Ltd,,,High,End User Support,07-07-2021 00:00:00,
+PR00018,Hardware,,Laptop not recieved,Not recieved,N/A,N/A,,Locon Solutions Pvt Ltd,,Critical,Critical,End User Support,07-07-2021 00:00:00,30-07-2021 00:00:00
+PR00019,Software,,Upload Testing,Upload testing,N/A,N/A,,ABC Automobile,,Critical,,End User Support,07-07-2021 00:00:00,27-07-2021 00:00:00
+PR00015,Software,,test by ankur,test,N/A,N/A,,ABC Automobile,,Medium,Critical,Network Support,01-07-2021 00:00:00,
+PR00014,Software,,Issue in Ritika's Laptop,test,N/A,N/A,,Locon Solutions Pvt Ltd,,Critical,,IT Support,29-06-2021 00:00:00,
+PR00013,CCTV,,Test2,Testing data,N/A,N/A,,Locon Solutions Pvt Ltd,,,,software department,19-06-2021 00:00:00,
+PR00012,Software,,Test By Pandey,testing,N/A,N/A,,ABC Automobile,,,,Server,18-06-2021 00:00:00,21-06-2021 00:00:00
+PR00011,CCTV,,Test By Ankur,test,N/A,N/A,,,,Critical,Critical,software department,17-06-2021 00:00:00,

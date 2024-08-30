@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+@model Api_ZserviceDesk.Models.zdesk_employee
+<button hidden id="license_info" name="@ViewBag.m"></button>
+<link href="../plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+<style>
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        height: 100% !important;
+        width: 100% !important;
+    }
+
+    .btn-outline-secondary:hover {
+        color: #fff;
+        background-color: #fff;
+        /*border-color: #fff;*/
+    }
+
+    /*.btn-outline-secondary {
+        color: #fff;
+        border-color: #fff;
+    }*/
+</style>
+
+<div class="auth-page">
+    <div class="card mb-0 shadow-none h-100">
+        <div class="card-body">
+            <div class="mx-3 mt-3 mb-2 text-center text-muted">
+                <span><img src="" id="logoimg" height="120" style="width:100%" alt="logo" class="my-3" /></span>
+            </div>
+            <!--<div class="mb-5">
+            <a href="/Home/Index" class="logo logo-admin">
+                <span><img src="../assets/images/logo-sm.png" height="30" alt="logo" class="my-3"></span>-->
+            @*<span><img src="../assets/images/logo-sm.png" height="16" alt="logo" class="logo-lg logo-dark my-3"></span>*@
+            <!--<span><img src="../assets/images/logo-sm.png" height="16" alt="logo" class="logo-lg logo-light my-3"></span>
+                </a>
+            </div>-->
+
+            <div class="px-3">
+                <h2 class="font-weight-semibold font-22 mb-2" style="text-align:center;">Asset Management System</h2>
+
+                <ul class="nav-border nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-semibold active" data-toggle="tab" href="#LogIn_Tab" role="tab">Log In</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane p-3 active" id="LogIn_Tab" role="tabpanel">
+                        @*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal auth-form my-4" }))
+                            {*@
+                        @*@if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                                    <p class="text-muted mb-0"> @ViewBag.Message :-</p>
+                                </div>
+                            }*@
+
+                        <div class="form-horizontal auth-form my-4">
+                            <div class="alert alert-danger alert-dismissable" style="display:none;" id="MessageAlert">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                                <p class="text-muted mb-0" id="Message"> </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <div class="input-group mb-3">
+                                    <span class="auth-form-icon">
+                                        <i class="dripicons-user"></i>
+                                    </span>
+                                    <input type="email" class="form-control" name="email" id="emailaddress">
+                                </div>
+                            </div><!--end form-group-->
+
+                            <div class="form-group">
+                                <label for="userpassword">Password</label>
+                                <div class="input-group mb-3">
+                                    <span class="auth-form-icon">
+                                        <i class="dripicons-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control" name="password" id="password">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 row">
+                                <div class="col-6 mt-2">
+                                    <button class="btn btn-gradient-primary btn-round btn-block waves-effect waves-light" id="btnLogin" type="submit" style="padding: 10px 0px;">Log In <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                </div>
+
+                                <div class="col-6 mt-2">
+                                    <button class="btn btn-round btn-outline-secondary btn-block waves-effect waves-light" style="box-shadow: 0 7px 14px 0 rgb(255 255 255 / 50%);color:black;" onclick="GoogleLogin()" id="btnGmailLogin"><img src="/images/gsuite.png" style="width:auto;height:30px;" /><span style="padding-left:10px;font-size:16px;">Sign in</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        @*}*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="LicenseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="exampleModalLabel">Register Product</h5>
+                <button type="button" id="closedLicenseModal" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="col-md-12">
+                                <label class="col-form-label text-right">License Key *</label>
+                                <div class="col-sm-12">
+                                    <input class="form-control" type="text" id="inpLicense">
+                                </div>
+                                <ul class="parsley-errors-list filled" id="SpnLicense" style="display:none">
+                                    <li class="parsley-required">This field is required</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="btnApply" class="btn btn-danger text-light px-4 mt-3 mb-0 ml-3">Apply</button>
+                <button type="button" class="btn btn-secondary text-light px-4 mt-3 mb-0 ml-3" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="../assets/pages/jquery.sweet-alert.init.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/View/Login/Index.js"></script>

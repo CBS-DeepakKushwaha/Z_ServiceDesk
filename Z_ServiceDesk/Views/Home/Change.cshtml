@@ -1,0 +1,750 @@
+﻿
+@{
+    ViewBag.Title = "Change";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+<style>
+    .daterangepicker.ltr.show-calendar.opensleft {
+        right: 0px;
+        margin-right: 150px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <button type="button" id="btnNew" class="btn btn-gradient-primary " onclick="location.href='/Changes/Index'" style="margin-top: -8px;"><i class="mdi mdi-tablet-dashboard mr-2"></i>Go to Module</button>
+            </div>
+            <h4 class="page-title">CHANGE MANAGEMENT</h4>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <h6 class="page-title">CURRENT STAGES</h6>
+    </div>
+</div>
+
+<div class="row" id="divCurrentStageCounters">
+
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <h6 class="page-title">CURRENT STATUS</h6>
+    </div>
+</div>
+
+<div class="row" id="divCounters">
+    @*<div class="col-xl-1 col-sm-6" style="cursor:pointer !important">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalNew" onclick="filterdata(this)" class="New"> </span></h2>
+                            <p class="mb-0">New</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalUnderApproval" onclick="filterdata(this)" class="Under Approval"></span></h2>
+                            <p class="mb-0">Under Approval</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalApproved" onclick="filterdata(this)" class="Approved"> </span></h2>
+                            <p class="mb-0">Approved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalUnderReview" onclick="filterdata(this)" class="UnderReview">0</span></h2>
+                            <p class="mb-0">Under Review</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalReviewed" onclick="filterdata(this)" class="Reviewed"></span></h2>
+                            <p class="mb-0">Reviewed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalImplemented" onclick="filterdata(this)" class="Implemented"> </span></h2>
+                            <p class="mb-0">Implemented</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalClosed" onclick="filterdata(this)" class="Closed"> </span></h2>
+                            <p class="mb-0">Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalCancel" onclick="filterdata(this)" class="Cancel"> </span></h2>
+                            <p class="mb-0">Cancelled</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalRejected" onclick="filterdata(this)" class="Rejected">0</span></h2>
+                            <p class="mb-0">Rejected</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalPostponed" onclick="filterdata(this)" class="Postponed">0</span></h2>
+                            <p class="mb-0">Postponed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+            <div class="card bg-primary cardbox">
+                <div class="card-body widget-style-2">
+                    <div class="media">
+                        <div class="media-body align-self-center">
+                            <h2 class="my-0"><span id="TotalRecord" onclick="filterdata(this)" class="TotalRecord"> </span></h2>
+                            <p class="mb-0">Total</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body" style="overflow:scroll;max-height:475px;height:484px;display:none">
+                <table id="tbodyViewWorkLoad" class="table table-striped table-bordered" style="width: 100% !important; font-size:11px;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Open</th>
+                            <th>Under Approval</th>
+                            @*<th>New</th>*@
+                            <th>Approved</th>
+                            <th>Under Review</th>
+                            <th>Reviewed</th>
+                            <th>Implemented</th>
+                            <th>Closed</th>
+                            <th>Cancelled</th>
+                            <th>Rejected</th>
+                            <th>Postponed</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddlTotalChangeChart" class="form-control ml-3" style="margin-top: -10px;">
+                                    <option value="30" selected>30 Days</option>
+                                    <option value="90">90 Days</option>
+                                    <option value="180">6 Months</option>
+                                    <option value="365">1 Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        @*<div class="form-group row bgHeading">
+                                <label class="col-lg-12 col-form-label font-weight-normal font-15">Total Incidents</label>
+                            </div>*@
+                        <div class="chart-demo">
+                            <div id="TotalChange_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--By Status-->
+<div class="row">
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0 mb-4">Open Category By Status</h4>
+                        <div class="pt-3 pb-4">
+                            <div id="ChangeCategory_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0">Open Change By Severity</h4>
+
+                        <div class="pt-3 pb-4">
+                            <div id="OpenChange_Severity_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0">Open Change By Change Type</h4>
+
+                        <div class="pt-3 pb-4">
+                            <div id="OpenChange_ChangeType_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0">Open Change By Urgency</h4>
+
+                        <div class="pt-3 pb-4">
+                            <div id="OpenChange_Urgency_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--By Technician-->
+<div class="row" style="display:none">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Technician</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_cha_tech_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenChangeTechnicianChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_cha_by_tech" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenChange_Technician_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Technician</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_cha_tech_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedChangeTechnicianChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_cha_by_tech" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedChange_Technician_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Location-->
+<div class="row" style="display:none">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_cha_location_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenChangeLocationChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_cha_by_location" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenChange_Location_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_cha_location_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedChangeLocationChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_cha_by_location" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedChange_Location_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sub Category-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_cha_SubCategory_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenChangeSubCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_cha_by_SubCategory" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenChange_SubCategory_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_cha_SubCategory_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedServiceSubCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_cha_by_SubCategory" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedChange_SubCategory_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Category-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_cha_Category_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenChangeCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_cha_by_Category" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenChange_Category_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Location</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_cha_Category_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedServiceCategoryChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_cha_by_Category" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedChange_Category_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Supprt  group Department-->
+<div class="row" style="display:none">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Support Group</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_cha_supp_gp_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenChangeSupportGroupChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_cha_by_supp_grp" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenChange_SupportGroup_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Support Group</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_cha_supp_gp_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedChangeSupportGroupChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_cha_by_supp_grp" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedChange_SupportGroup_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Support Department-->
+
+<div class="row" style="display:none">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_cha_sup_Department_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedChangeSupDepartmentChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_cha_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenChange_Sup_Depatment_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Sub Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_cha_sup_Department_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenChangeSupDepartmentChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_cha_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedChange_Sup_Depatment_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="~/Scripts/View/Common/Common.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Home/Change.js"></script>

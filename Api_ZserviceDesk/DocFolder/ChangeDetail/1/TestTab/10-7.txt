@@ -1,0 +1,29 @@
+
+Title
+Category
+Sub-Category
+Reason for Change
+Change Type
+Description
+Requester
+Owner
+Manager - Remove
+Urgency
+Impact
+Severity
+Risk
+Reviewer
+Change Approver
+Communication Plan
+
+
+DELETE ->
+	UpdateChangeManagementStatus
+	UpdateChangeManagementAsignTo
+	GetChangeMagementList
+	UpdChangeManagement
+	GetChangeManagementAllDetails
+	GetAdminDetails
+	GetAdminDetailsSubmitter
+	GetChangeManagementAllDetails
+	

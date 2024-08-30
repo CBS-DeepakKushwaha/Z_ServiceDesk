@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ZServiceDesk ITSM Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Enterprise IT Services Management & Asset Management" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Sweet Alert -->
+    <link href="../plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+    <link href="../plugins/animate/animate.css" rel="stylesheet" type="text/css">
+</head>
+@*<body class="account-body accountbg" style="zoom: 85% !important;background-image: url('../../Images/zsd bg.jpg');">*@
+<body class="bg-card" @*style="zoom: 85% !important;background-image: url('../../Images/zsd bg.jpg');"*@>
+
+    <!-- Log In page -->
+    <div class="container-fluid">
+        <!-- Log In page -->
+        <div class="row vh-100">
+            <div class="col-lg-4 pr-0">
+
+
+                @RenderBody()
+
+
+            </div>
+            <div class="col-lg-8 p-0 h-100vh d-flex justify-content-center auth-bg" id="layoutImage">
+
+            </div>
+        </div>
+    </div>
+    <!-- End Log In page -->
+    <!-- jQuery  -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery-ui.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/metismenu.min.js"></script>
+    <script src="../assets/js/waves.js"></script>
+    <script src="../assets/js/feather.min.js"></script>
+    <script src="../assets/js/jquery.slimscroll.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <link href="../plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+    <link href="../plugins/animate/animate.css" rel="stylesheet" type="text/css">
+
+    <!-- App js -->
+    @*<script src="../assets/js/app.js"></script>*@
+
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        logo();
+    });
+    function logo() {
+
+        $.ajax({
+            type: "Get",
+            contentType: "application/json; charset=utf-8",
+            url: "http://localhost:49708" + '/api/Masters/getlogo',
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                $("#logoimg").attr("src", data.logo);
+                $('#layoutImage').css("background-image", "url(" + data.background + ")");
+                document.getElementById('layoutImage').setAttribute("style", "background-image: url('" + data.background + "');");
+
+            },
+
+            error: function (edata) {
+                alert("error while feching record.");
+            }
+        });
+    }
+</script>

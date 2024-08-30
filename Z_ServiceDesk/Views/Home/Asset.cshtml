@@ -1,0 +1,475 @@
+﻿
+@{
+    ViewBag.Title = "Asset";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+@model Api_ZserviceDesk.Models.zdesk_employee
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <button type="button" id="btnNew" class="btn btn-gradient-primary " onclick="location.href='/Inventory/FixedAssets'" style="margin-top: -8px;"><i class="mdi mdi-tablet-dashboard mr-2"></i>Go to Module</button>
+            </div>
+            <h4 class="page-title">ASSET</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height:450px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Assets By Status</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(4, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="AssetsbyStatus_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Assets By Support Type</h4>
+                    </div>
+                    <div class="col-sm-3"  style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="AssetsbySupportType_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3" style="display:none;">
+        <div class="card">
+            <div class="card-body" style="max-height:532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Assets By AMC Status</h4>
+                    </div>
+                    <div class="col-sm-3"  style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="Asset_amc" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3" style="display:none;">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">ASSETS BY STATUS</h4>
+                    </div>
+                    <div class="col-sm-3"  style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="apex_pie3" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Assets By Warranty Expiry</h4>
+                    </div>
+                    <div class="col-sm-3"  style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="apex_warranty" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Assets By Life(Expiry)</h4>
+                    </div>
+                    <div class="col-sm-3"  style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="apex_asset_life_expiry" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Asset Life Pie Chart -->
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Assets By Life</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="apex_asset_life" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height:632px;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="header-title mt-0 mb-4">CMDB/Agent (Make, Model, S.No.)</h4>
+                    </div>
+                    @*<div class="col-sm-3">
+                            <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                        </div>*@
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="Patch_Information" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height:532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Patch Status</h4>
+                    </div>
+                    @*<div class="col-sm-3">
+                            <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                        </div>*@
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="Patch_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height:532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Purchase History</h4>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="PreviouslyPurchasedAssets_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="form-group row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group row bgHeading">
+                                <label class="col-lg-12 col-form-label font-weight-normal font-15">Previously Purchased Assets</label>
+                            </div>
+                            <div class="chart-demo">
+                                <div id="PreviouslyPurchasedAssets_Chart" class="apex-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Assets By AMC Expiry</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="apex_amc_warranty" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4"> CMDB / Agent Mapping</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        @*<button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>*@
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="ChartMapped" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body" style="margin-top:-10px!important;margin-bottom:-60px!important">
+                @*<h4 class="header-title mt-0 mb-4">ASSETS BY VENDOR</h4>*@
+                <div class="chart-demo">
+                    <div id="AssetsbyVendor_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                @*<h4 class="header-title mt-0 mb-4">ASSETS BY CATEGORY</h4>*@
+                <div class="chart-demo">
+                    <div id="AssetsbyCategory_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                @*<h4 class="header-title mt-0 mb-4">ASSETS BY OS</h4>*@
+                <div class="chart-demo">
+                    <div id="AssetsbyOS_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                @*<h4 class="header-title mt-0 mb-4">ASSETS BY LOCATION</h4>*@
+                <div class="chart-demo">
+                    <div id="AssetsbyLocation_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="display:none;">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-4">ASSETS BY LOCATION</h4>
+                <div class="form-group">
+                    <div class='input-group'>
+                        <label style="display:none">Select Range:</label>
+                        <select id="ddl_assest_by_location" class="form-control" style="display:none">
+                            <option value="1">1 Week</option>
+                            <option value="2">2 Weeks</option>
+                            <option value="3">1 Month</option>
+                            <option value="4">3 Months</option>
+                            <option value="5">Custom</option>
+                        </select>
+                        <input type="text" style="display:none" name="daterange" id="daterange_assest_byLocation" class="form-control" />
+                        <button class="btn btn-sm btn-default datebtn" type="button" style="display:none" onclick="Getassest_by_Location(this)">Filter</button>
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 14)"><span><i class="fa fa-file-excel-o fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div class="chart-demo">
+                    <div id="apex_column1" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="display:none;">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-4">ASSETS BY AMC STATUS</h4>
+                <div class="form-group">
+                    <div class='input-group'>
+                        <label style="display:none">Select Range:</label>
+                        <select style="display:none" id="ddl_Assets_AMCCategory" class="form-control">
+                            <option value="1">1 Week</option>
+                            <option value="2">2 Weeks</option>
+                            <option value="3">1 Month</option>
+                            <option value="4">3 Months</option>
+                            <option value="5">Custom</option>
+                        </select>
+                        <input type="text" style="display:none" name="daterange" id="daterange_Assets_AMCCategory" class="form-control" />
+                        <button class="btn btn-sm btn-default datebtn" style="display:none" type="button" onclick="GetAssets_AMCCategory(this)">Filter</button>
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 16)"><span><i class="fa fa-file-excel-o fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div class="chart-demo">
+                    <div id="apex_column3" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="display:none;">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-4">ASSETS BY CATEGORY</h4>
+                <div class="form-group">
+                    <div class='input-group'>
+                        <label style="display:none">Select Range:</label>
+                        <select id="ddl_assets_category_status" style="display:none" class="form-control">
+                            <option value="1">1 Week</option>
+                            <option value="2">2 Weeks</option>
+                            <option value="3">1 Month</option>
+                            <option value="4">3 Months</option>
+                            <option value="5">Custom</option>
+                        </select>
+                        <input type="text" style="display:none" name="daterange" id="daterange_assets_category_status" class="form-control" />
+                        <button class="btn btn-sm btn-default datebtn" type="button" style="display:none" onclick="Getassets_category_status(this)">Filter</button>
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 15)"><span><i class="fa fa-file-excel-o fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div class="chart-demo">
+                    <div id="apex_column2" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<div class="form-group row bgHeading">
+                                <label class="col-lg-12 col-form-label font-weight-normal font-15">Asset By BU</label>
+                            </div>*@
+                        <div class="chart-demo">
+                            <div id="AssetByBU_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+@Scripts.Render("~/bundles/jquery")
+
+@{
+    <script>
+        $(document).ready(function () {
+
+            GetUserSessionDetails();
+            ////SetUserRolePermissionsRequest('@Model.id');
+            setSessionvalues('@Model.id', '@Model.location_id_pk', '@Model.name', '@Model.email', '@Model.roleid');
+            //alert($.session.get("name"));
+        });
+
+        //Get User Roles Lists
+        function GetUserSessionDetails() {
+            ////var parm = {
+            ////    "ID": 0, "Section": "UserRoles"
+            ////};
+            ////var josnstr = JSON.stringify(parm);
+            $.ajax({
+                type: "Get",
+                async: false,
+                url: '/Home/GetUserSessionDetails',
+                ////data: josnstr,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    if (data != null) {
+                        ////SetUserRolePermissionsRequest(data.id);
+                        var UserSessionData = [];
+
+                        UserSessionData.push({
+                            UserID: data.id,
+                            UserEmail: data.email,
+                            UserRole: data.roleid,
+                        });
+
+                        localStorage.setItem('UserSession', JSON.stringify(UserSessionData));
+                        SetUserRolePermissionsRequest(data.id);
+                    }
+                },
+                error: function (edata) {
+                    alert("error while feching record.");
+                }
+            });
+        };
+
+        function setSessionvalues(id, location_id_pk, name, email, roleid) {
+            $.session.set("id", id);
+            $.session.set("roleid", roleid);
+            $.session.set("location_id_pk", location_id_pk);
+            $.session.set("name", name);
+            $.session.set("email", email);
+          //  $(".user-name").html("").html("<b>" + $.session.get("name") + "</b>");
+
+            $(".user-name").text("").text($.session.get("name"));
+            $(".user-name").find("p").text($.session.get("name"));
+
+        }
+    </script>
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="~/Scripts/View/Common/Common.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Home/AssetDashBoard.js"></script>
+
+
+

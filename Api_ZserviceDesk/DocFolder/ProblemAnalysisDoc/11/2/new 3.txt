@@ -1,0 +1,51 @@
+type karo
+
+sir license expiry ke baad superadmin login allow krna h?
+
+no
+
+then license renw kaise 
+
+from our central database at backend database we will ch
+
+then client s
+
+Full Suite = Auto-Discovery + Lifecycle
+Lifecycle = Lifecycle
+
+
+Full suite = 1500
+
+Lifecycle = 2200
+
+Total Asset = 3700 (Total record should not exceed 3700)
+
+Asset mapping - Applicabale / Not applicable
+
+
+1500 record - applicable
+2200 record - Not applicaable 
+
+If total records exceed 3700
+check if asset category value is applicable
+if asset mapping is applicable
+then check if existing records of applicable exceed with full suite license no.
+
+
+Technician - 3
+
+Support Department
+Support Group
+Technician
+
+Technician Type (Licensed, Non Licensed)
+
+If Non licensed (Hide role, and password fields) - Non mandat
+
+password - confirm password
+
+50
+
+ankur wait for 5 minutes
+
+ankur save this notepad text

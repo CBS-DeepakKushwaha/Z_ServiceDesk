@@ -1,0 +1,409 @@
+﻿
+@{
+    ViewBag.Title = "Task";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+<style>
+    .daterangepicker.ltr.show-calendar.opensleft {
+        right: 0px;
+        margin-right: 150px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <button type="button" id="btnNew" class="btn btn-gradient-primary " onclick="location.href='/ServiceRequest/Index'" style="margin-top: -8px;"><i class="mdi mdi-tablet-dashboard mr-2"></i>Go to Module</button>
+            </div>
+            <h4 class="page-title">TASK MANAGEMENT</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer !important">
+
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalPending" onclick="filterdata(this)" class="New"> </span></h2>
+                        <p class="mb-0">Pending</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalCompleted" onclick="filterdata(this)" class="Reviewed"></span></h2>
+                        <p class="mb-0">Completed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-1 col-sm-6" style="cursor:pointer">
+
+        <div class="card bg-primary cardbox">
+            <div class="card-body widget-style-2">
+                <div class="media">
+                    <div class="media-body align-self-center">
+                        <h2 class="my-0"><span id="TotalRecord" onclick="filterdata(this)" class="TotalRecord"> </span></h2>
+                        <p class="mb-0">Total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body" style="overflow:scroll;max-height:475px;height:484px;">
+                <table id="tbodyViewWorkLoad" class="table table-striped table-bordered" style="width: 100% !important; font-size:11px;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Pending</th>
+                            <th>Completed</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddlTotalTaskChart" class="form-control ml-3" style="margin-top: -10px;">
+                                    <option value="30" selected>30 Days</option>
+                                    <option value="90">90 Days</option>
+                                    <option value="180">6 Months</option>
+                                    <option value="365">1 Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        @*<div class="form-group row bgHeading">
+                                <label class="col-lg-12 col-form-label font-weight-normal font-15">Total Incidents</label>
+                            </div>*@
+                        <div class="chart-demo">
+                            <div id="TotalTask_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--By Status-->
+<div class="row">
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0 mb-4">Open Category By Status</h4>
+                        <div class="pt-3 pb-4">
+                            <div id="TaskCategory_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0">Open Task By Severity</h4>
+
+                        <div class="pt-3 pb-4">
+                            <div id="OpenTask_Severity_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0">Open Taks By Module Type</h4>
+
+                        <div class="pt-3 pb-4">
+                            <div id="OpenTask_moduleType_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0">Open Task By Task Type</h4>
+
+                        <div class="pt-3 pb-4">
+                            <div id="OpenTask_taskType_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--By Technician-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Technician</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_task_tech_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedTaskTechnicianChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_task_by_tech" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenTask_Technician_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Technician</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_task_tech_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedChangeTechnicianChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_task_by_tech" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedTask_Technician_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Supprt  group Department-->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Support Group</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_task_supp_gp_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenTaskSupportGroupChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_task_by_supp_grp" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenTask_SupportGroup_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Support Group</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_task_supp_gp_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedTaskSupportGroupChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_task_by_supp_grp" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedTask_SupportGroup_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Support Department-->
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Open Incidents By Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_open_task_sup_Department_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateOpenTaskSupDepartmentChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_task_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OpenTask_Sup_Depatment_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h4 class="header-title mt-0 mb-4">Closed Incidents By Sub Category</h4>*@
+                        <div class="form-group">
+                            <div class="input-group row" style="margin-left:1px;">
+                                <label>Filter :</label>
+                                <select id="ddl_closed_task_sup_Department_chart" class="form-control ml-3 col-sm-10" style="margin-top: -10px;">
+                                    <option value="1">Today</option>
+                                    <option value="2">1 Week</option>
+                                    <option value="3">2 Weeks</option>
+                                    <option value="4">1 Month</option>
+                                    <option value="5">3 Months</option>
+                                    <option value="6" selected>All</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                                <button class="btn btn-sm btn-default datebtn ml-2" type="button" onclick="GenerateClosedTaskChangeSupDepartmentChart()" style="margin-top:-15px;"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_task_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="ClosedTask_Sup_Depatment_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<!-- App favicon -->
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Common/Common.js?t=<?=time()?>"></script>
+<script src="~/Scripts/View/Home/Task.js"></script>
+@*<script src="~/Scripts/View/TasksDashboard/Index.js"></script>*@
+
+

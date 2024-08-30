@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Title = "Vendor";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <button type="button" id="btnNew" class="btn btn-gradient-primary " onclick="location.href='/VendorManagement/Index'" style="margin-top: -8px;"><i class="mdi mdi-tablet-dashboard mr-2"></i>Go to Module</button>
+            </div>
+            <h4 class="page-title">VENDOR</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8 text-lg-left">
+                        <h4 class="page-title" id="lblTName"></h4>
+                    </div>
+                    <div class="col-md-4 text-lg-right">
+                        @*<button class="btn btn-gradient-primary" id="btnEdit" type="submit" style="display:none;">Edit</button>
+                            <button class="btn btn-gradient-primary" id="btnUpdate" type="submit">Update</button>
+                            <button class="btn btn-gradient-primary" id="btnSubmit" type="submit">Submit</button>*@
+                        @*<button class="btn btn-gradient-danger" onclick="location.href='/ServerMonitoring/Index'" type="button">Cancel</button>*@
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:10px!important">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row bgHeading">
+                                                    <label class="col-lg-12 col-form-label font-weight-normal font-15">Vendor By Category</label>
+                                                </div>
+                                                <div class="chart-demo">
+                                                    <div id="VendorByCategory_Chart" class="apex-charts"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row bgHeading">
+                                                    <label class="col-lg-12 col-form-label font-weight-normal font-15">Vendor By Status</label>
+                                                </div>
+                                                <div class="chart-demo">
+                                                    <div id="VendorByStatus_Chart" class="apex-charts"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row bgHeading">
+                                                    <label class="col-lg-12 col-form-label font-weight-normal font-15">Vendor By Location</label>
+                                                </div>
+                                                <div class="chart-demo">
+                                                    <div id="VendorByLocation_Chart" class="apex-charts"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @*<div class="form-group row bgHeading">
+                            <label class="col-lg-12 col-form-label font-weight-normal font-15">Assets By Vendor</label>
+                        </div>*@
+                                        <div class="chart-demo">
+                                            <div id="AssetsbyVendor_Chart" class="apex-charts"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row dis-none">
+                            <div class="col-lg-12">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row bgHeading">
+                                                    <label class="col-lg-12 col-form-label font-weight-normal font-15">Vendor By Service Category</label>
+                                                </div>
+                                                <div class="chart-demo">
+                                                    <div id="VendorBySubCategory_Chart" class="apex-charts"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Common/Common.js"></script>
+<script src="~/Scripts/View/Home/vendor.js"></script>
+@*<script src="~/Scripts/View/VendorDashboard/Index.js"></script>*@

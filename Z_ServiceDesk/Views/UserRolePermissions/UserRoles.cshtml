@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "UserRoles";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                @*<ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Masters</a></li>
+                        <li class="breadcrumb-item active">Common Category</li>
+                    </ol>*@
+            </div>
+            <h4 class="page-title">USER ROLES</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <button type="button" class="btn btn-gradient-primary btnAddNew" data-toggle="modal" data-animation="bounce" data-target="#NewRoleModal"><i class="mdi mdi-plus-circle-outline mr-2"></i>New</button>
+                <button type="button" class="btn btn-gradient-primary editview" data-toggle="modal" data-animation="bounce" data-target="#EditPopUp" id="btnEdit" hidden></button>
+                <table id="tblUserRoles" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Role Id</th>
+                            <th>License Type</th>
+                            <th>Role Name</th>
+                            @*<th>Status</th>
+                                <th>Created Date</th>*@
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+<div id="NewRoleModal" class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Add User Role</h5>
+                <button type="button" id="closedModel" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">License Type *</label>
+                            <div class="col-lg-8">
+                                <select class="select form-control select2" id="ddlRoleType" name="ddlRoleType" required>
+                                    <option value="0">Select</option>
+                                    <option value="1">Standard Technician</option>
+                                    <option value="2">Enterprise Technician</option>
+                                    <option value="3">Asset Technician</option>
+                                </select>
+                                <ul class="parsley-errors-list filled" id="SpnRoleType" style="display:none">
+                                    <li class="parsley-required">This value is required.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Role Name *</label>
+                            <div class="col-lg-8">
+                                <input type="hidden" id="hdnRoleID" value="0">
+                                <input type="text" class="form-control" id="txtNewRole" required="" placeholder="" autocomplete="off">
+                                <ul class="parsley-errors-list filled" id="SpnNewRole" style="display:none">
+                                    <li class="parsley-required">This value is required.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--end card-body-->
+            <div class="modal-footer">
+                <button class="btn btn-gradient-primary" id="btnSubmit" type="submit">Add</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+
+<div id="EditPopUp" class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Edit User Role</h5>
+                <button type="button" id="closedModel" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">License Type *</label>
+                            <div class="col-lg-8">
+                                <select class="select form-control select2" id="ddlEditRoleType" name="ddlEditRoleType" required>
+                                    <option value="0">Select</option>
+                                    <option value="1">Standard Technician</option>
+                                    <option value="2">Enterprise Technician</option>
+                                    <option value="3">Asset Technician</option>
+                                </select>
+                                <ul class="parsley-errors-list filled" id="SpnEditRoleType" style="display:none">
+                                    <li class="parsley-required">This value is required.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Role Name *</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="txtEditRole" required="" placeholder="" autocomplete="off">
+                                <ul class="parsley-errors-list filled" id="SpnEditRole" style="display:none">
+                                    <li class="parsley-required">This value is required.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Status *</label>
+                            <div class="col-lg-8">
+                                <input type="checkbox" class="form-control" id="chkEditStatus" required="" placeholder="" autocomplete="off">
+                                <ul class="parsley-errors-list filled" id="SpnchkEditStatus" style="display:none">
+                                    <li class="parsley-required">This value is required.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--end card-body-->
+            <div class="modal-footer">
+                <button class="btn btn-gradient-primary" id="btnSubmitEdit" type="submit">Update</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+
+<!-- Plugins js -->
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../plugins/moment/moment.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<script src="../plugins/select2/select2.min.js"></script>
+<script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="../plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+<script src="../plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="../plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
+<script src="../assets/pages/jquery.forms-advanced.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/UserRolePermissions/UserRoles.js"></script>
+<script src="~/Scripts/View/Common/Common.js"></script>
+

@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+@model Api_ZserviceDesk.Models.zdesk_employee
+<button hidden id="license_info" name="@ViewBag.m"></button>
+<link href="../plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+<style>
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        height: auto !important;
+        width: 100% !important;
+    }
+</style>
+
+
+<div class="auth-page">
+    <div class="card auth-card shadow-lg">
+        <div class="card-body">
+            <div class="px-3">
+                <div class="auth-logo-box">
+                    <a href="../dashboard/analytics-index.html" class="logo logo-admin"><img src="../assets/images/logo-sm.png" height="55" alt="logo" class="auth-logo"></a>
+                </div><!--end auth-logo-box-->
+                <div class="text-center auth-logo-text">
+                    <h4 class="mt-0 mb-3 mt-5">ZServiceDesk Support Portal</h4>
+                </div>
+                @using (Html.BeginForm("CompanyLicence", "Home", FormMethod.Post))
+                {
+                    if (@ViewBag.Message != null)
+                    {
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                            <p class="text-muted mb-0"> @ViewBag.Message :-</p>
+
+                        </div>
+                    }
+
+
+                    <!--end auth-logo-text-->
+
+
+                    <div class="form-horizontal auth-form my-4">
+                <h5>Product is not activated. Please enter your license key.</h5>
+                        <div class="form-group">
+                            <label for="username"></label>
+                            <div class="input-group mb-3">
+                                <span class="auth-form-icon">
+                                    
+                                </span>
+                                <input class="form-control" type="text" id="licenceKey" name="licenceKey" required="">
+                            </div>
+                        </div><!--end form-group-->
+
+                       
+
+                       
+
+                        <div class="form-group mb-0 row">
+                            <div class="col-12 mt-2">
+                                <button class="btn btn-gradient-primary btn-round btn-block waves-effect waves-light" id="btnLogin" type="submit">Activate</button>
+                            </div><!--end col-->
+                        </div> <!--end form-group-->
+                    </div><!--end form-->
+
+                }
+            </div><!--end /div-->
+
+        </div><!--end card-body-->
+    </div><!--end card-->
+
+</div><!--end auth-page-->
+
+
+<script src="../plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="../assets/pages/jquery.sweet-alert.init.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/View/Login/Index.js"></script>

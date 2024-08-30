@@ -1,0 +1,523 @@
+﻿
+@{
+    ViewBag.Title = "VendorDetails";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+            </div>
+            <h4 class="page-title">VENDOR NAME : <span id="spanSupplierName"></span></h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                @*<h4 class="header-title m-t-0 m-b-30" style="MARGIN-LEFT: -18PX;">VENDOR NAME - <span id="spanSupplierName">HCL TECHNOLOGIES</span></h4>*@
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link waves-effect waves-light active" id="v-pills-home1-tab" data-toggle="pill" href="#v-pills-profile1" role="tab" aria-controls="v-pills-profile" aria-selected="true">VENDOR INFORMATION</a>
+                            <a class="nav-link waves-effect waves-light " id="v-pills-home3-tab" data-toggle="pill" href="#v-pills-profile3" role="tab" aria-controls="v-pills-profile" aria-selected="true">RISK EVALUATION</a>
+                            <a class="nav-link waves-effect waves-light " id="v-pills-home4-tab" data-toggle="pill" href="#v-pills-profile4" role="tab" aria-controls="v-pills-profile" aria-selected="true">CONTACT DETAILS</a>
+                            <a class="nav-link waves-effect waves-light " id="v-pills-purchase-tab" data-toggle="pill" href="#v-pills-purchase" role="tab" aria-controls="v-pills-profile" aria-selected="true">PURCHASE</a>
+                            <a class="nav-link waves-effect waves-light " id="v-pills-sold-tab" data-toggle="pill" href="#v-pills-sold" role="tab" aria-controls="v-pills-profile" aria-selected="true">SOLD</a>
+                            <a class="nav-link waves-effect waves-light " id="v-pills-home2-tab" data-toggle="pill" href="#v-pills-profile2" role="tab" aria-controls="v-pills-profile" aria-selected="true">DOCUMENTS</a>
+                            <a class="nav-link waves-effect waves-light " id="v-pills-contract-tab" data-toggle="pill" href="#v-pills-contract" role="tab" aria-controls="v-pills-profile" aria-selected="true">CONTRACTS</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="tab-content mo-mt-2" id="v-pills-tabContent">
+                            @* Vendor Information Tab *@
+                            <div class="tab-pane fade active show" id="v-pills-profile1" role="tabpanel" aria-labelledby="v-pills-home1-tab">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table class="table table-striped table-bordered mb-0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Vendor Code</th>
+                                                            <td id="txtSupplierCode"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Vendor Name</th>
+                                                            <td id="txtSupplierName"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Vendor Category</th>
+                                                            <td id="txtSupplierCategory"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Vendor Status</th>
+                                                            <td id="txtSupplierStatus"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Contact Person</th>
+                                                            <td id="txtConatactPerson"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Address</th>
+                                                            <td id="txtAddress"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">City</th>
+                                                            <td id="txtCity"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Email</th>
+                                                            <td id="txtEmail"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">Phone Number</th>
+                                                            <td id="txtPhoneNumber"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-nowrap" scope="row">GSTNumber</th>
+                                                            <td id="txtGSTNumber"></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-md-12 text-lg-right mb-2">
+                                            <a href="/VendorManagement/EditVendorsmanagement" class="btn btn-gradient-primary btnedit" id="btnEdit"><span>Edit</span></a>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-12">
+                                            <div class="card m-b-20">
+                                                <div class="card-header">
+                                                    <b>Service Category</b>
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-striped table-bordered mb-0">
+                                                        <tbody id="tbody_services">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-xs-12">
+                                            <div class="card m-b-20">
+                                                <div class="card-header">
+                                                    Notes
+                                                </div>
+                                                <div class="card-body">
+                                                    <p id="txtNotes"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Documents Tab *@
+                            <div class="tab-pane fade" id="v-pills-profile2" role="tabpanel" aria-labelledby="v-pills-home2-tab">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-gradient-primary" data-toggle="modal" data-animation="bounce" data-target="#AddDocumentModal"><i class="mdi mdi-plus-circle-outline mr-2"></i>New</button>
+                                            <table id="tblDocumentDetails" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Doc Type </th>
+                                                        <th>Doc Name</th>
+                                                        <th>Description</th>
+                                                        <th>Docs</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                                <div class="modal fade" id="AddDocumentModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title mt-0" id="myLargeModalLabel">Add Document</h5>
+                                                <button type="button" id="CloseDocumentModal" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Doc Type</label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" id="txtDocType" autocomplete="off">
+                                                                <ul class="parsley-errors-list filled" id="SpnDocType" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Doc Name</label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" id="txtDocName">
+                                                                <ul class="parsley-errors-list filled" id="SpnDocName" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">File </label>
+                                                            <div class="col-lg-8">
+                                                                <br />
+                                                                <input type="file" id="txtFile" class="dropify">
+                                                                <ul class="parsley-errors-list filled" id="Spninput-file-now_DFD" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-2 col-form-label">Description</label>
+                                                            <div class="col-lg-10">
+                                                                <textarea style="min-height: 120px !important;height:102px !important;" id="txtReasonForGatePass" required="" class="form-control"></textarea>
+                                                                <ul class="parsley-errors-list filled" id="SpnDesignation" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-gradient-primary" id="btnSupplierDocumentDetails" type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Risk Evaluation Tab *@
+                            <div class="tab-pane fade" id="v-pills-profile3" role="tabpanel" aria-labelledby="v-pills-home3-tab">
+                                <div class="form-group col-md-12 pb-5">
+                                    <button type="button" class="btn btn-gradient-danger float-right" data-dismiss="modal" aria-hidden="true"> Cancel</button>
+                                    <button type="submit" id="btnSubmit" class="btn btn-gradient-primary float-right mr-2">Save</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group col-md-12">
+                                            <label for="inputEmail4" class="col-form-label">Risk Assessment Result :</label>
+                                            <textarea style="background:aliceblue !important" required="" rows="7" class="form-control" id="txtRiskAssesMentResult" disabled="">No Impact</textarea>
+                                            <ul class="parsley-errors-list filled" id="Spntxt_1" style="display:none">
+                                                <li class="parsley-required">This value is required.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group col-md-12">
+                                            <label for="inputEmail4" class="col-form-label">Reference :</label>
+                                            <textarea style="background:aliceblue !important" required="" rows="7" class="form-control" id="txtRefrence" disabled="">No Impact</textarea>
+                                            <ul class="parsley-errors-list filled" id="Spntxt_1" style="display:none">
+                                                <li class="parsley-required">This value is required.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="col-form-label">Track Record :</label>
+                                        <textarea style="background:aliceblue !important" required="" rows="7" class="form-control" id="txtTrackRecord" disabled="">No Impact</textarea>
+                                        <ul class="parsley-errors-list filled" id="Spntxt_1" style="display:none">
+                                            <li class="parsley-required">This value is required.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="elm3" class="col-md-4">Credit Rating:</label>
+                                            <fieldset style="margin-left: 15px;">
+                                                <input type="radio" name="CreditRating" id="Good" value="" checked="checked"><label for="Good">Good</label><br>
+                                                <input type="radio" name="CreditRating" id="Average" value="2"> <label for="Avrage">Average</label><br>
+                                                <input type="radio" name="CreditRating" id="VeryGood" value="3"><label for="Avrage">Very Good</label><br>
+                                            </fieldset>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Purchase Details Tab*@
+
+                            @* Purchase Details Tab*@
+                            <div class="tab-pane fade" id="v-pills-sold" role="tabpanel" aria-labelledby="v-pills-sold-tab">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="header-title">Assets</h4>
+                                        <div class="card-body">
+                                            <table id="tblAssets_Sold" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Asset Tag</th>
+                                                        <th>Category</th>
+                                                        <th>Make</th>
+                                                        <th>Model</th>
+                                                        <th>Serial Number</th>
+                                                        <th>Location</th>
+                                                        <th>Sold Amount</th>
+                                                        @*<th>Action</th>*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="v-pills-purchase" role="tabpanel" aria-labelledby="v-pills-purchase-tab">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="header-title">Consumables</h4>
+                                        <div class="card-body">
+                                            <table id="tblConsumables" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        @*<th><input id="CheckAll" type="checkbox"></th>*@
+                                                        <th>Id </th>
+                                                        <th>Stored Location</th>
+                                                        <th>Category</th>
+                                                        <th>Item</th>
+                                                        <th>Quantity</th>
+                                                        <th>Added On</th>
+                                                        @*<th>Action</th>*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="header-title">Assets</h4>
+                                        <div class="card-body">
+                                            <table id="tblAssets" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Asset Tag</th>
+                                                        <th>Category</th>
+                                                        <th>Make</th>
+                                                        <th>Model</th>
+                                                        <th>Serial Number</th>
+                                                        <th>Location</th>
+                                                        @*<th>Action</th>*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="header-title">Softwares</h4>
+                                        <div class="card-body">
+                                            <table id="tblSoftwares" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Software Name</th>
+                                                        <th>Type</th>
+                                                        <th>License No</th>
+                                                        <th>From Date</th>
+                                                        <th>Expiry Date</th>
+                                                        @*<th>Action</th>*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="header-title">Asset Components</h4>
+                                        <div class="card-body">
+                                            <table id="tblComponents" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Component</th>
+                                                        <th>Expiry Date</th>
+                                                        @*<th>Action</th>*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                            </div>
+                            @* Contact Details Tab *@
+                            <div class="tab-pane fade" id="v-pills-profile4" role="tabpanel" aria-labelledby="v-pills-home4-tab">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-body">
+                                            @*<div class="card-body">*@
+                                            <div class="btn-group ">
+                                                <button type="button" class="btn btn-gradient-primary px-4 mt-0" data-toggle="modal" data-animation="bounce" data-target="#ContactModal"><i class="mdi mdi-plus-circle-outline mr-2"></i>New</button>
+                                            </div>
+
+                                            <table id="tblContactDetails" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th><input id="CheckAll" type="checkbox"></th>
+                                                        <th>Name </th>
+                                                        <th>Email</th>
+                                                        <th>Mobile Number</th>
+                                                        <th>Address</th>
+                                                        <th>Destination</th>
+                                                        @*<th>Action</th>*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="ContactModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title mt-0" id="myLargeModalLabel">Add Contact</h5>
+                                                <button type="button" class="close" id="CloseContactModal" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Name *</label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" id="txtName" autocomplete="off">
+                                                                <ul class="parsley-errors-list filled" id="SpnName" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Email *</label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" id="txtEmailId">
+                                                                <ul class="parsley-errors-list filled" id="SpnEmail" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Mobile No *</label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" id="txtMobileNo">
+                                                                <ul class="parsley-errors-list filled" id="SpnMobileNo" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Address</label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" id="txtContactAddress">
+                                                                <ul class="parsley-errors-list filled" id="SpnAddress" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Designation</label>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" class="form-control" id="txtDesignation">
+                                                                <ul class="parsley-errors-list filled" id="SpnDesignation" style="display:none">
+                                                                    <li class="parsley-required">This value is required.</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-gradient-primary" id="btnSupplierContactDetails" type="submit">Create</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* Contracts *@
+                            <div class="tab-pane fade" id="v-pills-contract" role="tabpanel" aria-labelledby="v-pills-contract-tab">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-body mt-4">
+                                            <table id="tblContract" class="table table-striped table-bordered dt-responsive" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th><input id="CheckAll" type="checkbox"></th>
+                                                        <th>Contract Id</th>
+                                                        <th>Contract Name</th>
+                                                        <th>Description</th>
+                                                        <th>Review Period</th>
+                                                        @*<th>Action</th>*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../plugins/moment/moment.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<script src="../plugins/select2/select2.min.js"></script>
+<script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="../plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+<script src="../plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="../plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
+<script src="../assets/pages/jquery.forms-advanced.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Common/Common.js"></script>
+<script src="~/Scripts/View/SupplierManagements/SupplierDetails.js"></script>

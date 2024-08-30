@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Permission Issue";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<!-- Sweet Alert -->
+<link href="../plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+<link href="../plugins/animate/animate.css" rel="stylesheet" type="text/css">
+
+
+<h2>@ViewBag.Title.</h2>
+<div>
+    <p>
+        You do not have permissions to view this Page.
+    </p>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<!-- Sweet-Alert  -->
+<script src="../plugins/sweet-alert2/sweetalert2.min.js"></script>
+<script src="../assets/pages/jquery.sweet-alert.init.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#BtnSlide").click();
+    });
+</script>

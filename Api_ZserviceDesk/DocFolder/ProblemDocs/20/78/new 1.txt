@@ -1,0 +1,7 @@
+
+var apiurl = 'http://demo.zservicedesk.com/api/';
+var localhost = 'http://demo.zservicedesk.com/';
+var filehost = 'http://demo.zservicedesk.com';
+var filefolder = 'FileUpload/';
+var Controllerhost = 'http://XXX/controller/';
+var SalesMailid = "rkmgpj0@gmail.com";

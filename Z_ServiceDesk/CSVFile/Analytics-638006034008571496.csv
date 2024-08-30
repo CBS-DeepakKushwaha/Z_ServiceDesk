@@ -1,0 +1,4 @@
+id,Hostname,ipaddress,Domain,SerialNo,ParentAgent,osname,LastUpdate,asset_id_pk,asset_tag,CreatedDate,group_id_fk
+52894,DESKTOP-MJVMEEM,192.168.43.193,WORKGROUP,CNU40495CF,N/A,Microsoft Windows 10 Pro,2022-08-26 14:21:06.470,,,26-08-2022 14:21:06,NA
+52989,FIROJKHAN-PC,192.168.1.26,WORKGROUP,4CZ1191LZF,N/A,Microsoft Windows 7 Ultimate ,2022-08-29 18:17:08.477,,,29-08-2022 18:17:08, Test Group, Test Group 1
+55651,DESKTOP-LUQO5MC,192.168.1.61,WORKGROUP,5CG5104DSK,N/A,Microsoft Windows 10 Pro,2022-10-04 11:29:41.700,,,04-10-2022 11:29:41, Test patch 23, Test Group

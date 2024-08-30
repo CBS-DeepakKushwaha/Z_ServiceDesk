@@ -1,0 +1,517 @@
+in preventive maintenance menu - add button in submit feedback
+date format correction
+preventive status background color
+
+vendor management page
+add hyperlink on vendor code
+remove action button in vendor
+
+
+submit feedback is not working
+
+
+
+-------------------------------------------------------------------------------
+Ticket index alternate fetch details
+------------------------------------------------------------------------------------
+
+$("#tblTicket").DataTable({
+                data: data,
+                paging: true,
+                sort: false,
+                searching: true,
+                ordering: false,
+                //order: [],
+                //lengthMenu: [
+                //    [10, 25, 50, -1],
+                //    ['10 Rows', '25 Rows', '50 Rows', 'Show All']
+                //],
+                responsive: true,
+                columns: [
+                   
+                    {
+                        data: 'ticket_id_pk',
+                        sWidth: '2px',
+                        sClass: "view",
+                        bSortable: false,
+                        render: function (ticket_id_pk) {
+                            return '<input id="check" class="cb-element checkbox tktcbk" name="' + ticket_id_pk + '" type="checkbox">';  // <button class="btn btn-xs btn-success grid-buttons btnedit" name="' + catogory_id_pk + '" style="margin-right:5px;"><i class="fa fa-edit icon-ser"></i></button>
+                        }
+                    },
+                    {
+                        data: 'ticket_id_pk', render: function (ticket_id_pk, type, row) {
+                            // Combine the first and last names into a single table field
+                            //return '<a href="/Ticket/TicketDetails" class="editview"  name="' + ticket_id_pk + '">' + row.prefix + + row.ticket_id_pk +'  <i class="fa fa-flag fa-fw" data-toggle="tooltip" title="" style="color:#f39c12 !important" data-original-title="Normal priority"></i></a>';
+                            if (row.priority_id_pk === 1) {
+                                return ' <a href="/Ticket/TicketDetails" title="Critical" class="editview"  name="' + ticket_id_pk + '">  <i class="fa fa-flag fa-fw" data-toggle="tooltip" title="Severity - 1" style="color:#ea2d2d !important" title="Normal priority" data-original-title="Normal priority"></i>   &nbsp; <i class="fa fa-eye" data-toggle="tooltip" title="" style="color:#35adaf !important" data-original-title="Normal priority"></i> &nbsp; ' + row.prefix + + row.ticket_id_pk + ' </a>';
+                                // return '<span class="badge badge-primary ENABLED" style="background-color:#ea2d2d;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (row.priority_id_pk === 2) {
+                                return ' <a href="/Ticket/TicketDetails" title="High" class="editview"  name="' + ticket_id_pk + '">  <i class="fa fa-flag fa-fw" data-toggle="tooltip" title="Severity - 2" style="color:#b38909 !important" title="Normal priority" data-original-title="Normal priority"></i>   &nbsp;  <i class="fa fa-eye" data-toggle="tooltip" title="" style="color:#35adaf !important" data-original-title="Normal priority"></i> &nbsp; ' + row.prefix + + row.ticket_id_pk + '</a>';
+                                // return '<span class="badge badge-primary ENABLED" style="background-color:#23af73  !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (row.priority_id_pk === 3) {
+                                return ' <a href="/Ticket/TicketDetails" title="Medium" class="editview"  name="' + ticket_id_pk + '"> <i class="fa fa-flag fa-fw" data-toggle="tooltip" title="Severity - 3" style="color:#ffee07 !important" data-original-title="Normal priority"></i>   &nbsp;  <i class="fa fa-eye" data-toggle="tooltip" title="" style="color:#35adaf !important" data-original-title="Normal priority"></i> &nbsp; ' + row.prefix + + row.ticket_id_pk + '</a>';
+                                // return '<span class="badge badge-primary ENABLED" style="background-color:#b3ae1f;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (row.priority_id_pk === 4) {
+                                return ' <a href="/Ticket/TicketDetails" title="Low" class="editview"  name="' + ticket_id_pk + '"> <i class="fa fa-flag fa-fw" data-toggle="tooltip" title="Severity - 4" style="color:#067304ad  !important" data-original-title="Normal priority"></i>   &nbsp;  <i class="fa fa-eye" data-toggle="tooltip" title="" style="color:#35adaf !important" data-original-title="Normal priority"></i> &nbsp; ' + row.prefix + + row.ticket_id_pk + '</a>';
+                                //  <a class="fa fa-edit tktedit" style="font-size:24px" data-toggle="tooltip" name="' + ticket_id_pk + '" data-toggle="modal" data-target="#myModalNew" style="color:#35adaf !important" ></a>
+                                //  return '<span class="badge badge-primary ENABLED" style="background-color:#3bc0c3 !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (row.priority_id_pk == 0) {
+                                return ' <a href="/Ticket/TicketDetails" title="Low" class="editview"  name="' + ticket_id_pk + '"> <i class="fa fa-flag fa-fw" data-toggle="tooltip" title="Priority Not Assigned" style="color:#adb1b3  !important" data-original-title="Normal priority"></i>   &nbsp;  <i class="fa fa-eye" data-toggle="tooltip" title="" style="color:#35adaf !important" data-original-title="Normal priority"></i> &nbsp; ' + row.prefix + + row.ticket_id_pk + '</a>';
+                                //  return '<span class="badge badge-primary ENABLED" style="background-color:#3bc0c3 !important;" name="' + status + '">' + status + '</span>';
+                            }
+
+                        }
+                    },
+                    { data: 'CATEGORY' },
+                    { data: 'SUB_CATEGORY' },
+                    { data: 'subject' },
+                    {
+                        data: "call_type",
+                        render: function (call_type) {
+                            // Check if blank
+                            if (call_type === 1) {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#8b938f;font-size: 13px !important;" name="' + call_type + '">' + 'Incident' + '</span>';
+                            }
+                            else if (call_type === 2) {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#8b938f !important;font-size: 13px !important;" name="' + call_type + '">' + 'Service' + '</span>';
+                            }
+                            else if (call_type === 0) {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#8b938f !important;font-size: 13px !important;" name="' + call_type + '">' + 'N/A' + '</span>';
+                            }
+                            else if (call_type === null) {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#8b938f !important;font-size: 13px !important;" name="' + call_type + '">' + 'N/A' + '</span>';
+                            }
+                            // If not blank display data normally
+                            //   return '<span class="badge badge-primary DISABLED" style="background-color:#2ca04a;" name="' + status + '">' + status + '</span>';
+                            //  return ' <input type="checkbox" class="custom-switch" checked name="switch1" data-textOn="ON" data-textOff="OFF" data - trackColorOn="#512DA8" data - trackColorOff="#616161" data - textColorOff="#fff" data - trackBorderColor="#555" >'; 
+                        }
+                    },
+                    {
+                        "data": "created_date",
+                        "type": "date",
+                        "render":
+                            function (data, type, full) {
+                                return (data) ? moment(data).format('DD/MM/YYYY  -  HH:mm:ss') : '';
+                            }
+                    },
+                    {
+                        data: 'name',
+                        sWidth: '140px',
+                        sClass: "view",
+                        bSortable: false,
+                        render: function (name) {
+                            return '<a href="#" class="adminview"  name="' + name + '" data-toggle="modal" data-target=".bs-example-modal-lgTechnician" >  <i class="fa fa-eye" data-toggle="tooltip" title="" style="color:#35adaf !important" data-original-title="Normal priority"></i>  &nbsp;  ' + name + '</a>';  // <button class="btn btn-xs btn-success grid-buttons btnedit" name="' + catogory_id_pk + '" style="margin-right:5px;"><i class="fa fa-edit icon-ser"></i></button>
+                        }
+                    },
+                    {
+                        data: 'ticket_id_pk', render: function (ticket_id_pk, type, row) {
+                            if (row.is_sla_applicable == 0) {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#b5b6b7;" name="' + row.non_negative + '">' + 'N/A' + '</span>';
+                            }
+                            if (row.status == 'Pause') {
+                                return '<i class="fa fa-pause" aria-hidden="true"></i>  &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#23af73;font-size: 13px !important;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                            }
+                            else if (row.status == 'Pause' || parseFloat(row.non_negative) < 0) {
+                                return '<i class="fa fa-pause" aria-hidden="true"></i>  &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#f64e60;font-size: 13px !important;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                            }
+                            if (row.status == 'Closed') {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#b5b6b7;" name="' + row.non_negative + '">' + 'N/A' + '</span>';
+                            }
+                            if (row.status == 'Cancel') {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#b5b6b7;" name="' + row.non_negative + '">' + 'N/A' + '</span>';
+                            }
+                            if (row.status == 'Resolved') {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#b5b6b7;" name="' + row.non_negative + '">' + 'N/A' + '</span>';
+                            }
+                            var duecheck = false;
+                            var str1 = row.non_negative;
+                            var str2 = "-";
+                            if (str1 != null && str1.indexOf(str2) != -1) {
+                                duecheck = true;
+                            }
+                            if (row.status == 'Pause') {
+                                return '<i class="fa fa-pause" aria-hidden="true"></i>  &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#838893;font-size: 13px !important;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                            }
+                            else if (row.status == 'Pause' || parseFloat(row.non_negative) < 0) {
+                                return '<i class="fa fa-pause" aria-hidden="true"></i>  &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#f64e60;font-size: 13px !important;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                            }
+                            if (row.status == 'Closed') {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#b5b6b7;" name="' + row.non_negative + '">' + 'N/A' + '</span>';
+                            }
+                            if (duecheck == true) {
+                                //  if (row.status == 'Pause') {
+                                //     return '<i class="fa fa-pause" aria-hidden="true"></i>  &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#23af73 ;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                                // }
+                                if (row.SlaStatus == "Pause") {
+                                    return '<i class="fa fa-pause" aria-hidden="true"></i>  &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#f64e60;font-size: 13px !important;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                                } else if (row.SlaStatus == "Running") {
+                                    return '<i class="fa fa-play" aria-hidden="true"> </i>  &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#f64e60 !important;font-size: 13px !important;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                                }
+                                // return '<span class="badge badge-primary ENABLED" style="background-color:#ea2d2d;" name="' + row.non_negative + '">' + row.non_negative + '  OverDue' + '</span> <i class="fa fa-pause" aria-hidden="true"></i>';
+                            }
+                            //else if (parseFloat(row.non_negative) < 0 || row.status == 'Pause') {
+                            //    return '<i class="fa fa-pause" aria-hidden="true"></i>  &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#ea2d2d;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                            //}
+                            else if (parseFloat(row.non_negative) < 0) {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#ea2d2d;" name="' + row.non_negative + '">' + row.non_negative + '</span> </i>';
+                            } else if (row.non_negative == null) {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#23af73 ;" name="' + row.non_negative + '">' + row.non_negative + '</span>';
+                            } else {
+                                if (row.SlaStatus == "Running") {
+                                    return '<i class="fa fa-play" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;<span class="badge badge-primary ENABLED" style="background-color:#23af73;font-size: 13px !important;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                                } else if (row.SlaStatus == "Pause") {
+                                    return '<i class="fa fa-pause" aria-hidden="true"> </i> &nbsp;&nbsp;&nbsp; <span class="badge badge-primary ENABLED" style="background-color:#f64e60 !important;font-size: 13px !important;" name="' + row.non_negative + '">' + row.non_negative + '</span> ';
+                                }
+                            }
+                        }
+                    },
+                    {
+                        data: "status",
+                        render: function (status) {
+                            // Check if blank
+                            if (status === "New") {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#f64e60;font-size: 13px !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (status === "Closed") {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#23af73 !important;font-size: 13px !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (status === "Assigned") {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#b3ae1f;font-size: 13px !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (status === "In Progress") {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#3bc0c3 !important;font-size: 13px !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (status === "Pause") {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#de7b00;font-size: 13px !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (status === "Resolved") {
+                                return '<span class="badge badge-primary" style="background-color:#bb60c1 !important;font-size: 13px !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (status === "Reopened") {
+                                return '<span class="badge badge-primary" style="background-color:#f24f7c !important;font-size: 13px !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            else if (status === "Cancel") {
+                                return '<span class="badge badge-primary ENABLED" style="background-color:#23af73  !important;font-size: 13px !important;" name="' + status + '">' + status + '</span>';
+                            }
+                            // If not blank display data normally
+                            //   return '<span class="badge badge-primary DISABLED" style="background-color:#2ca04a;" name="' + status + '">' + status + '</span>';
+                            //  return ' <input type="checkbox" class="custom-switch" checked name="switch1" data-textOn="ON" data-textOff="OFF" data - trackColorOn="#512DA8" data - trackColorOff="#616161" data - textColorOff="#fff" data - trackBorderColor="#555" >'; 
+                        }
+                    },
+                    //{ data: 'department_name' }, 
+                    //{ data: 'LOCATION' },
+                    { data: 'SUPPORT_DEPARTMENT' },
+                    { data: 'SUPPORT_DEPARTMENT_GROUP' },
+                    {
+                        data: 'email', sWidth: '140px', sClass: "view", bSortable: false, render: function (email) {
+                            return '<a href="#" class="adminviewsubmitter"  name="' + email + '" data-toggle="modal" data-target=".bs-example-modal-lgSubmitter" >  <i class="fa fa-eye" data-toggle="tooltip" title="" style="color:#35adaf !important" data-original-title="Normal priority"></i>  &nbsp;  ' + email + '</a>';  // <button class="btn btn-xs btn-success grid-buttons btnedit" name="' + catogory_id_pk + '" style="margin-right:5px;"><i class="fa fa-edit icon-ser"></i></button>
+                        }
+                    },
+
+                    //{ data: 'ASSIGNED_ENGINEER'},
+                    //{ data: 'USER_CONTACT_NUMBER'},
+                    //{ data: 'USER_EMAIL'},
+                    //{ data: 'RESLOVED_DATE' },
+                    //{ data: 'PRIORITY'},
+
+
+                    //{
+                    //   data: 'consultant_id_fk', render: function (consultant_id_fk, type, row) {
+                    //       return '<a href="#" class="consultant"  name="' + consultant_id_fk + '"  data-toggle="modal" data-target="#myModalConsultant"> <i class="fa fa-eye" data-toggle="tooltip" title="" style="color:#35adaf !important" data-original-title="Normal priority"></i>  &nbsp;' + row.consultant_name +'  </a>';
+                    //     }
+                    //},
+
+
+
+
+                    //{ data: 'sub_location' },
+                    //{ data: 'gate' },
+                    //{ data: 'floor_name' },
+                    //{ data: 'section_name' },
+                    //{ data: 'building_room_no' },
+                ],
+                dom: 'Bflrtip',
+                lengthChange: true,
+                buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        text: '<i class="fa fa-files-o fa-1x"></i>',
+                        titleAttr: 'Copy'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fa fa-file-excel-o fa-1x"></i>',
+                        titleAttr: 'Excel'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fa fa-file-pdf-o fa-1x"></i>',
+                        titleAttr: 'PDF'
+                    },
+                    {
+                        extend: 'colvis',
+                        text: '<i class="fa fa-list fa-1x"></i>',
+                        titleAttr: 'colvis'
+                    },
+                    //'colvis'
+                ]
+
+            });
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+===================================================================================================
+
+add new field - Workaround - No Edit
+
+
+Description Box
+
+In Problem details page - add new field workaround - Desription Box - 
+
+Add button 
+Save
+
+publish workaround 
+attached incidnets
+
+------------------------------------------
+ProblemManagementTbl -> Workaround Field
+tickets_tbl -> Workaround Field
+
+This is a sample workaround data to check the working of code.
+
+
+
+======================================================================================
+SERVICE UPDATE PROCEDURE
+======================================================================================
+
+USE [zdesknew]
+GO
+/****** Object:  StoredProcedure [dbo].[zdesk_upd_service_request_sp]    Script Date: 21-07-2021 23:03:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[zdesk_upd_service_request_sp](
+										@service_req_id_pk int,
+									    @subject varchar (max) NULL,
+										@support_dep_id_pk int NULL,
+										@support_group_id_fk int NULL,
+										@client_id_pk int NULL,
+										@asign_to int  NULL,
+										@asset_id_pk int  NULL,
+										@common_cat_id_pk int NULL,
+										@sub_category_id_pk int NULL,
+										@message varchar(max)  NULL,
+										@send_ticket_notification int  NULL,
+										@priority_id_pk int NULL,
+										@logged_via varchar(max) NULL,
+										@department_id_fk int NULL,
+										@user_id_fk int NULL,
+										@urgency_id_fk int NULL,
+										@impact_id_fk int NULL,
+										@location_id_fk int NULL,
+										@is_send_email int NULL,
+										@is_send_message int NULL,
+										@ser_req_status_id_pk int NULL,
+										@catalogue_description varchar(max) NULL,
+										@is_purchase_required int NULL ,
+										@approval_required int NULL,
+										@cost decimal(18,2) NULL,
+										@is_sla_applicable int NULL,
+										@sub_location_id_fk int NULL,
+										@section_id_fk int NULL,
+										@floor_id_fk int NULL,
+										@building_room_no varchar(max) NULL,
+										@gate varchar(max) NULL,
+										@consultant_id_fk int NULL,
+										@user_name varchar(max) NULL,
+										@user_con_no varchar(max) NULL,
+										@custom_field_s_no varchar(max) NULL,
+									    @custom_field_make varchar(max) NULL,
+										@custom_field_model varchar(max) NULL,
+										@approver1 int NULL,
+										@approver2 int NULL,
+										@approver3 int NULL,
+										@other_approver int NULL,
+										@approval_type int NULL
+									  )
+as  
+begin  
+set nocount on  
+	IF(@approval_type IS NOT NULL AND @approval_type = 2)
+		BEGIN
+			Update zdesk_m_service_request_tbl Set  
+				subject=@subject,
+				support_dep_id_pk=@support_dep_id_pk,
+				support_group_id_fk=@support_group_id_fk,
+				client_id_pk=@client_id_pk,
+				asign_to=@asign_to,
+				asset_id_pk=@asset_id_pk,
+				common_cat_id_pk=@common_cat_id_pk,
+				sub_category_id_pk=@sub_category_id_pk,
+				message=@message,
+				send_ticket_notification=@send_ticket_notification,
+				priority_id_pk=@priority_id_pk ,
+				logged_via =@logged_via,
+				department_id_fk=@department_id_fk ,
+				user_id_fk=@user_id_fk,
+				urgency_id_fk=@urgency_id_fk,
+				impact_id_fk=@impact_id_fk,
+				location_id_fk=@location_id_fk,
+				is_send_email=@is_send_email,
+				is_send_message=@is_send_message,
+				catalogue_description=@catalogue_description ,
+				is_purchase_required=@is_purchase_required  ,
+				approval_required=@approval_required ,
+				cost=@cost ,
+				is_sla_applicable=@is_sla_applicable ,
+				sub_location_id_fk=@sub_location_id_fk ,
+				section_id_fk=@section_id_fk ,
+				floor_id_fk=@floor_id_fk ,
+				building_room_no=@building_room_no ,
+				gate=@gate,
+				consultant_id_fk = @consultant_id_fk,
+				user_name = @user_name,
+				user_con_no = @user_con_no,
+				custom_field_s_no = @custom_field_s_no,
+				custom_field_make = @custom_field_make,
+				custom_field_model = @custom_field_model,
+				approver_one = @approver1,
+				approver_two = @approver2,
+				approver_three = @approver3,
+				other_approver = @other_approver,
+				approval_type = @approval_type
+			where service_req_id_pk=@service_req_id_pk;
+					Select 'Service Request Updated Successfully' as 'status',1 as status_id
+		END
+	ELSE IF(@approval_type = 1)
+		BEGIN
+			Update zdesk_m_service_request_tbl Set  
+				subject=@subject,
+				support_dep_id_pk=@support_dep_id_pk,
+				support_group_id_fk=@support_group_id_fk,
+				client_id_pk=@client_id_pk,
+				asign_to=@asign_to,
+				asset_id_pk=@asset_id_pk,
+				common_cat_id_pk=@common_cat_id_pk,
+				sub_category_id_pk=@sub_category_id_pk,
+				message=@message,
+				send_ticket_notification=@send_ticket_notification,
+				priority_id_pk=@priority_id_pk ,
+				logged_via =@logged_via,
+				department_id_fk=@department_id_fk ,
+				user_id_fk=@user_id_fk,
+				urgency_id_fk=@urgency_id_fk,
+				impact_id_fk=@impact_id_fk,
+				location_id_fk=@location_id_fk,
+				is_send_email=@is_send_email,
+				is_send_message=@is_send_message,
+				catalogue_description=@catalogue_description ,
+				is_purchase_required=@is_purchase_required  ,
+				approval_required=@approval_required ,
+				cost=@cost ,
+				is_sla_applicable=@is_sla_applicable ,
+				sub_location_id_fk=@sub_location_id_fk ,
+				section_id_fk=@section_id_fk ,
+				floor_id_fk=@floor_id_fk ,
+				building_room_no=@building_room_no ,
+				gate=@gate,
+				consultant_id_fk = @consultant_id_fk,
+				user_name = @user_name,
+				user_con_no = @user_con_no,
+				custom_field_s_no = @custom_field_s_no,
+				custom_field_make = @custom_field_make,
+				custom_field_model = @custom_field_model,
+				approver_one = @user_id_fk,
+				approver_two = @user_id_fk,
+				approver_three = @user_id_fk,
+				approval_type = @approval_type
+			where service_req_id_pk=@service_req_id_pk;
+					Select 'Service Request Updated Successfully' as 'status',1 as status_id
+		END
+	ELSE
+		BEGIN
+			Update zdesk_m_service_request_tbl Set  
+				subject=@subject,
+				support_dep_id_pk=@support_dep_id_pk,
+				support_group_id_fk=@support_group_id_fk,
+				client_id_pk=@client_id_pk,
+				asign_to=@asign_to,
+				asset_id_pk=@asset_id_pk,
+				common_cat_id_pk=@common_cat_id_pk,
+				sub_category_id_pk=@sub_category_id_pk,
+				message=@message,
+				send_ticket_notification=@send_ticket_notification,
+				priority_id_pk=@priority_id_pk ,
+				logged_via =@logged_via,
+				department_id_fk=@department_id_fk ,
+				user_id_fk=@user_id_fk,
+				urgency_id_fk=@urgency_id_fk,
+				impact_id_fk=@impact_id_fk,
+				location_id_fk=@location_id_fk,
+				is_send_email=@is_send_email,
+				is_send_message=@is_send_message,
+				catalogue_description=@catalogue_description ,
+				is_purchase_required=@is_purchase_required  ,
+				approval_required=@approval_required ,
+				cost=@cost ,
+				is_sla_applicable=@is_sla_applicable ,
+				sub_location_id_fk=@sub_location_id_fk ,
+				section_id_fk=@section_id_fk ,
+				floor_id_fk=@floor_id_fk ,
+				building_room_no=@building_room_no ,
+				gate=@gate,
+				consultant_id_fk = @consultant_id_fk,
+				user_name = @user_name,
+				user_con_no = @user_con_no,
+				custom_field_s_no = @custom_field_s_no,
+				custom_field_make = @custom_field_make,
+				custom_field_model = @custom_field_model,
+				approver_one = @approver1,
+				approver_two = @approver2,
+				approver_three = @approver3,
+				other_approver = @other_approver,
+				approval_type = @approval_type
+			where service_req_id_pk=@service_req_id_pk;
+					Select 'Service Request Updated Successfully' as 'status',1 as status_id
+		END
+		
+set nocount off  
+end
+
+
+==============================================================
+22-07-2021
+==============================================================
+
+Mandatory fields for service request new/update
+
+
+KEDB - known error db
+
+subject,symptoms,workaround,resolution,created_date,reference_prob_id
+
+Search Solution
+popup 
+
+Search bar (improve PC Performance)
+autosearch
+
+(Knowledgebase title + KEDB Title)
+
+Non editable
+
+search textbox (kb KEDB  ) Knowledge Article - how to 
+                           Known Error - how
+

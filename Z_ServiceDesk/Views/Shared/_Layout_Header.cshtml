@@ -1,0 +1,96 @@
+﻿
+@{ Html.RenderAction("Menu", "Admin"); }
+
+<!-- end leftbar-tab-menu-->
+<!-- Top Bar Start -->
+<div class="topbar">
+    <!-- Navbar -->
+    <nav class="navbar-custom" style="background-image: url('../../Images/topbar.jpg') !important;">
+        <ul class="list-unstyled topbar-nav float-right mb-0">
+            <li class="dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                   aria-haspopup="false" aria-expanded="false">
+                    <img src="../assets/images/users/user-4.jpg" alt="profile-user" class="rounded-circle" />
+                    <span class="ml-1 nav-user-name hidden-sm user-name">@*Admin*@ <i class="mdi mdi-chevron-down"></i> </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    @*<a class="dropdown-item" href="#"><i class="dripicons-user text-muted mr-2"></i> Profile</a>
+                        <a class="dropdown-item" href="#"><i class="dripicons-gear text-muted mr-2"></i> Settings</a>
+                        <a class="dropdown-item" href="#"><i class="dripicons-lock text-muted mr-2"></i> Lock screen</a>*@
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Masters/Profile"><i class="dripicons-exit text-muted mr-2"></i> Profile</a>
+                    <a class="dropdown-item" id="adminlogout"><i class="dripicons-exit text-muted mr-2"></i> Logout</a>
+                </div>
+            </li>
+
+        </ul><!--end topbar-nav-->
+
+        <ul class="list-unstyled topbar-nav mb-0">
+
+            <li>
+                <button class="button-menu-mobile nav-link" id="BtnSlide">
+                    <i data-feather="menu" class="align-self-center"></i>
+                </button>
+            </li>
+            <li class="hide-phone">
+                <h3 style="color:white;margin-top: 21px;" id="lblTitle"> </h3>
+            </li>
+        </ul>
+    </nav>
+    <!-- end navbar-->
+</div>
+<!-- Top Bar End -->
+
+<div id="divConfirmationDialogBox" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close ModalClosebtn" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MESSAGE</h4>
+            </div>
+            <div class="modal-body">
+                <asp:Label ID="lblConfirmationMessage" runat="server" class="Success"></asp:Label>
+            </div>
+            <div class="modal-footer" style="text-align:center;display:block">
+                <button type="button" id="btnConfirmationYes" onclick="DeleteConfirm();" style="background-color: #f64e60 !important;" class="btn btn-default btnModalAdd btn-primary">Yes</button>
+                <button type="button" id="btnConfirmationNo" class="btn btn-default btnModalAdd btn-primary" style="background-color: #23af73 !important; " data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divUserConfirmationDialogBox" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close ModalClosebtn" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MESSAGE</h4>
+            </div>
+            <div class="modal-body">
+                <asp:Label ID="lblUserConfirmationMessage" runat="server" class="Success"></asp:Label>
+            </div>
+            <div class="modal-footer" style="text-align:center;display:block">
+                <button type="button" id="btnUserConfirmationYes" onclick="UpdateConfirm();" style="background-color: #f64e60 !important;" class="btn btn-default btnModalAdd btn-primary">Yes</button>
+                <button type="button" id="btnUserConfirmationNo" onclick="UpdateConfirmationNo();" class="btn btn-default btnModalAdd btn-primary" style="background-color: #23af73 !important; " data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divUserConfirmationDialogBoxDC" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close ModalClosebtn" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MESSAGE</h4>
+            </div>
+            <div class="modal-body">
+                <asp:Label ID="lblUserConfirmationMessageDC" runat="server" class="Success"></asp:Label>
+            </div>
+            <div class="modal-footer" style="text-align:center;display:block">
+                <button type="button" id="btnUserConfirmationYesDC" onclick="UpdateConfirmationYes();" style="background-color: #f64e60 !important;" class="btn btn-default btnModalAdd btn-primary">Yes</button>
+                <button type="button" id="btnUserConfirmationNoDC" class="btn btn-default btnModalAdd btn-primary" style="background-color: #23af73 !important; " data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,295 @@
+﻿@{
+    ViewBag.Title = "Task";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+<style>
+    .daterangepicker.ltr.show-calendar.opensleft {
+        right: 0px;
+        margin-right: 150px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <button type="button" id="btnNew" class="btn btn-gradient-primary " onclick="location.href='/ServiceRequest/Index'" style="margin-top: -8px;"><i class="mdi mdi-tablet-dashboard mr-2"></i>Go to Module</button>
+            </div>
+            <h4 class="page-title">ANALYTICS</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="FirewallStatus_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0 mb-4">Windows Update Status</h4>
+                        <div class="pt-3 pb-4">
+                            <div id="WinodwsUpdate_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mt-0 mb-4">System Restore Status</h4>
+                        <div class="pt-3 pb-4">
+                            <div id="Sytem_Restore_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="Startup_Services_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="HDDSize_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="OSDetails_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="RAMSize_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="RecycleBinSize_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="Temporary_Folder_Size_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_open_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="SharedFolders_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="UserAccounts_Chart" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="Assetstobecollected" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="form-group">
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <input type="text" style="display:none" name="daterange" id="daterange_closed_pro_by_sup_Department" class="form-control ml-3" />
+                            </div>
+                        </div>
+                        <div class="chart-demo">
+                            <div id="AssetPrinter" class="apex-charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+<!-- App favicon -->
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+@*<script src="~/Scripts/View/Common/Common.js?t=<?=time()?>"></script>*@
+<script src="~/Scripts/View/Home/Analytics.js"></script>
+@*<script src="~/Scripts/View/TasksDashboard/Index.js"></script>*@

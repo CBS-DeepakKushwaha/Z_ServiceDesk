@@ -1,0 +1,8 @@
+prefix,serial_number,asset_cat_name,asset_id,due_date,name,maintainance_date,status,feedback,descripency_status,sub_location,building_room_no,section_name,department_name,user_con_no,user_name,asset_name,model_name,asset_tag,SUPPORT_TYPE,remark_engineer,created_date
+PM09062022,2,Camera,KJHG34578,30-06-2022 00:00:00,,10-06-2022 00:00:00,Completed,,No,,,,,,,,,,Out Of Support,,09-06-2022 10:36:09
+PM14052022,1,Office Equipment,PROP\OFFEQ001484,31-05-2022 00:00:00,,15-05-2022 00:00:00,Re-Opened,,N/A,,,,,,,,,,Out Of Support,Test Remarks,14-05-2022 20:19:07
+PM23062022,3,Server,VMSERIAL-2,30-06-2022 00:00:00,,,Pending,,No,,,,,,,,,,Out Of Support,,23-06-2022 10:35:32
+PM23062022,4,Server,VMSERIAL,30-06-2022 00:00:00,,,Pending,,No,,,,,,,,,,Out Of Support,,23-06-2022 10:35:32
+PM23062022,5,Tables,567890HJKL,30-06-2022 00:00:00,,,Pending,,No,,,,,,,,,,Out Of Support,,23-06-2022 10:35:32
+PM30072022,6,Desktop,2TYW6L3// Express Service Code - 6165692247,31-07-2022 00:00:00,Testing,03-08-2022 00:00:00,Completed,,No,,,,,,,,Optiplex 3080,SGR\HO\CPU\00006,Under Warranty,Issue resolved,30-07-2022 17:39:17
+PM30072022,7,Desktop,2TYW6L3// Express Service Code - 6165692247,31-07-2022 00:00:00,Testing,31-07-2022 00:00:00,Completed,,No,,,,,,,,Optiplex 3080,SGR\HO\CPU\00006,Under Warranty,,30-07-2022 17:44:14

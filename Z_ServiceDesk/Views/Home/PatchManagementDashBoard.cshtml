@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewBag.Title = "Incident";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<style>
+    .daterangepicker.ltr.show-calendar.opensleft {
+        right: 0px;
+        margin-right: 150px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <h4 class="page-title">PATCH MANAGEMENT</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height:450px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Patch Status</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="PatchStatus_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Approved Patches</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="ApprovedPatches_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Not Approved Patches</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button" onclick="ExcelGetIncident(this, 13)"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="NotApprovedPatches_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Declined Patches</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="DeclinedPatches_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Deployment By Type</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="DeploymentByType_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body" style="max-height: 532px;">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="header-title mt-0 mb-4">Deployment By Status</h4>
+                    </div>
+                    <div class="col-sm-3" style="display:none">
+                        <button class="btn btn-sm btn-default datebtn" type="button"><span><i class="fa fa-download fa-2x" style="color:#23af73"></i></span></button>
+                    </div>
+                </div>
+                <div style="padding-top:1rem; padding-bottom: 1rem;">
+                    <div id="DeploymentByStatus_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body" style="margin-top:-10px!important;margin-bottom:-60px!important">
+                @*<h4 class="header-title mt-0 mb-4">ASSETS BY VENDOR</h4>*@
+                <div class="chart-demo">
+                    <div id="MissingPatchesByOS_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body" style="margin-top:-10px!important;margin-bottom:-60px!important">
+                @*<h4 class="header-title mt-0 mb-4">ASSETS BY VENDOR</h4>*@
+                <div class="chart-demo">
+                    <div id="InstalledPatchesByOS_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body" style="margin-top:-10px!important;margin-bottom:-60px!important">
+                @*<h4 class="header-title mt-0 mb-4">ASSETS BY VENDOR</h4>*@
+                <div class="chart-demo">
+                    <div id="ApplicablePatchesByOS_Chart" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- App favicon -->
+
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../assets/js/app.js"></script>
+<script src="~/Scripts/View/Common/Common.js?t=<?=time()?>"></script>
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Home/PatchManagementDashBoard.js"></script>

@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "ActiveDirectory";
+    Layout = "~/Views/Shared/_Layout_Add.cshtml";
+}
+
+<style>
+    .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
+        opacity: .75;
+    }
+
+    .modal .modal-dialog .close {
+        top: 0;
+        position: absolute;
+        right: 0;
+        height: 36px;
+        width: 36px;
+        background-color: #313a46;
+        opacity: 1;
+        border: 2px solid #fff;
+        text-shadow: none;
+        color: #fff;
+        border-radius: 50%;
+        padding: 0;
+    }
+</style>
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                @*<ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">ActiveDirectory</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);"> Ad</a></li>
+                </ol>*@
+            </div>
+            <h4 class="page-title">
+                AD SEVER DETAIL LISTS
+            </h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div>
+<!-- end page title end breadcrumb -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+             <button type="button" class="btn btn-gradient-primary px-4 mt-0 btnAddNew" data-toggle="modal" data-animation="bounce" data-target="#peripheralsname"><i class="mdi mdi-plus-circle-outline mr-2"></i>New</button>
+                <table id="ADList" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th><input id="CheckAll" type="checkbox"></th>
+                            <th>Server Name</th>
+                            <th>Domain</th>
+                            <th>Organizationunit</th>
+                            <th>Username</th>
+                            @*<th>Password</th>*@
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @*<tr>
+                                <td><input id="CheckAll" type="checkbox"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button id='btnEdit_" + i + "' type='button' class='btn btn-sm btn-soft-success btn-circle mr-2' onclick='rowEdit(this.id);'><i class='dripicons-pencil'></i></button>
+                                    <button id='btnDelete_" + i + "' type='button' class='btn btn-sm btn-soft-danger btn-circle' onclick='rowElim(this.id);'><i class='dripicons-trash' aria-hidden='true'></i></button>
+                                </td>
+                            </tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+<div id="peripheralsname" class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Add Active Directory</h5>
+                <button type="button" id="closedModel" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Server</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="txtServer" type="text" placeholder="Enter Server IP"> 
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Domain</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="txtDomain" type="text" placeholder="Enter Domain Name">
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Organization Unit</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="txtOrganization" type="text" placeholder="Enter Organization Unit Name">
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">User</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="txtUser" type="text" placeholder="Enter User Name">
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Password</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" id="txtPwd" type="text" placeholder="Enter Password"> 
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">Is Default</label>
+                            <div class="col-lg-8">
+                                <input type="checkbox"  id="checkdefault" checked="checked">
+                            </div>
+                        </div>
+                    </div>
+                     </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-gradient-primary" id="btnSubmit"  type="submit">Add</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+<!-- Plugins js -->
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="../plugins/moment/moment.js"></script>
+<script src="../plugins/daterangepicker/daterangepicker.js"></script>
+<script src="../plugins/select2/select2.min.js"></script>
+@*<script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="../plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+<script src="../plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="../plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
+<script src="../assets/pages/jquery.forms-advanced.js"></script>*@
+<script src="~/Scripts/View/Common/WebConfig.js"></script>
+<script src="~/Scripts/View/Common/Common.js"></script>
+<script src="~/Scripts/View/Home/ActiveDirectory.js"></script>
+<script>
+    
+   
+   
+</script>
+

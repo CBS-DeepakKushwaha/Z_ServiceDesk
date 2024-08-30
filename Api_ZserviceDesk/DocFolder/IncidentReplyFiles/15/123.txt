@@ -1,0 +1,56 @@
+ public static int execSQL(string query)
+        {
+            int resp = 0;
+            try
+            {
+                connection = new SqlConnection(connectionString);
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    connection.Close();
+                    cmd.Connection = connection;
+                    cmd.CommandText = query;
+                    connection.Open();
+                    resp = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return resp;
+        }
+
+        public static object execScalar(string query)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                connection.Close();
+                cmd.Connection = connection;
+                cmd.CommandText = query;
+                connection.Open();
+                return cmd.ExecuteScalar();
+            }
+        }
+
+        public static DataTable FetchData(string Query = "")
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                SqlConnection conn = new SqlConnection(connectionString);
+                SqlCommand cmd;
+
+                cmd = new SqlCommand(Query, conn);
+                cmd.CommandType = CommandType.Text;
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    sda.Fill(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            return dt;
+        }
